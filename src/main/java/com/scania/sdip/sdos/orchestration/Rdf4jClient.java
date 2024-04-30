@@ -63,9 +63,9 @@ public class Rdf4jClient {
    * since this class is not a spring component yet, we are using credentials a constants.
    * once it is refactored as a spring component,
    * then we must get the credentials from application.properties or use planned future jwt functionality */
-  private static String STARDOG_USER = "test-user";
+  private static String STARDOG_USER = "admin";
 
-  private static String STARDOG_PASS = "test_@user";
+  private static String STARDOG_PASS = "admin";
 
   public Rdf4jClient() {
     //default  constructor
@@ -359,14 +359,16 @@ public class Rdf4jClient {
   }
 
   private void configureAuthOnRepo(SPARQLRepository repository, IParameterMemory iParameterMemory) {
-    if (JwtTokenUtil.oboTokenExists(iParameterMemory)) {
-      Map<String, String> header = new HashMap<>();
-      header.put(SDOSConstants.AUTHORIZATION, SDOSConstants.BEARER + " " + JwtTokenUtil.getOboToken(iParameterMemory));
-      repository
-              .setAdditionalHttpHeaders(header);
-    } else {
-      throw new IncidentException(SdipErrorCode.MISSING_OBO_TOKEN_ERROR, LOGGER);
-    }
+
+    repository.setUsernameAndPassword(STARDOG_USER,STARDOG_PASS);
+//    if (JwtTokenUtil.oboTokenExists(iParameterMemory)) {
+//      Map<String, String> header = new HashMap<>();
+//      header.put(SDOSConstants.AUTHORIZATION, SDOSConstants.BEARER + " " + JwtTokenUtil.getOboToken(iParameterMemory));
+//      repository
+//              .setAdditionalHttpHeaders(header);
+//    } else {
+//      throw new IncidentException(SdipErrorCode.MISSING_OBO_TOKEN_ERROR, LOGGER);
+//    }
   }
 
 }

@@ -53,7 +53,7 @@ App with required roles.
 1. Clone the project from gitlab.
 
    ```
-   git clone https://gitlab.scania.com/semantic-data-platform/backend/sdos.git
+   gh repo clone scania/sdos
    ```
 
 2. Go to the root of the project
@@ -131,11 +131,7 @@ at http://localhost:8050/sdos/swagger-ui.html
 ## Support
 
 If you face any issues, find any bugs or have any questions regarding the application the SDP
-development team is available through mail [DL7167@scania.com](mailto:DL7167@scania.com)
-
-## Authors
-
-- **Felix Ericsson**
+development team is available through mail [sdos@scania.com](mailto:sdos@scania.com)
 
 ## Quick links
 
