@@ -97,7 +97,7 @@ dependencies {
                 exclude group: 'org.slf4j'
                 exclude group: 'ch.qos.logback'
             }
-    implementation project(':common-sdip:sdip-error-codes')
+    implementation project(':sdos-error-code')
     implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
     implementation 'io.jsonwebtoken:jjwt-impl:0.11.2'
     implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
