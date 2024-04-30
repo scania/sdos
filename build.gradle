@@ -1,0 +1,122 @@
+plugins {
+    id 'org.springframework.boot' version '3.2.2'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'org.barfuin.gradle.jacocolog' version '3.1.0'
+}
+
+group = 'com.scania.sdip'
+version = '0.0.1-SNAPSHOT'
+apply plugin: 'maven-publish'
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+    configureEach {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+        implementation.exclude group: "org.slf4j", module: "slf4j-log4j12"
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        url "https://maven.restlet.talend.com/"
+    }
+    maven {
+        url "https://maven.stardog.com"
+    }
+}
+
+ext['log4j2.version'] = '2.22.1'
+
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation("org.springframework.boot:spring-boot-starter-web") {
+        exclude group: 'org.springframework', module: 'spring-web'
+    }
+    implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+    runtimeOnly group: 'org.apache.logging.log4j', name: 'log4j-layout-template-json', version: '2.22.1'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.4.0'
+    implementation 'io.swagger.core.v3:swagger-annotations-jakarta:2.2.20'
+    implementation 'org.springframework:spring-web:6.1.5'
+
+    implementation group: 'commons-cli', name: 'commons-cli', version: '1.4'
+    implementation group: 'commons-codec', name: 'commons-codec', version: '1.14'
+    implementation 'com.lmax:disruptor:3.4.1'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+    implementation group: 'com.predic8', name: 'soa-model-core', version: '2.0.1'
+    implementation 'org.restlet.jee:org.restlet.ext.json:2.4-M1'
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.9'
+    implementation 'org.apache.groovy:groovy-xml:4.0.5'
+    implementation 'org.apache.groovy:groovy-json:4.0.5'
+    implementation 'org.apache.jena:jena-core:5.0.0-rc1'
+    implementation 'org.apache.jena:jena-arq:5.0.0-rc1'
+    implementation 'org.apache.jena:jena-iri:5.0.0-rc1'
+    implementation group: 'org.apache.commons', name: 'commons-compress', version: '1.26.1'
+    implementation group: 'org.apache.commons', name: 'commons-text', version: '1.11.0'
+    implementation group: 'org.quartz-scheduler', name: 'quartz', version: '2.5.0-rc1'
+    implementation group: 'io.grpc', name: 'grpc-protobuf', version: '1.62.2'
+    implementation group: 'org.apache.velocity', name: 'velocity-engine-core', version: '2.3'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.14.0'
+    implementation group: 'org.apache.shiro', name: 'shiro-core', version: '2.0.0'
+    implementation group: 'org.json', name: 'json', version: '20240303'
+    implementation group: 'com.google.guava', name: 'guava', version: '33.0.0-jre'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.6.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.6.0'
+
+    implementation group: 'com.complexible.stardog.protocols.http', name: 'stardog-protocols-http-client', version: '10.0.0'
+    implementation group: 'com.complexible.stardog.rdf4j', name: 'stardog-rdf4j-core', version: '10.0.0'
+    implementation group: 'com.google.guava', name: 'failureaccess', version: '1.0.1'
+    implementation group: 'org.eclipse.rdf4j', name: 'rdf4j-rio-turtle', version: '3.5.0'
+    implementation group: 'org.eclipse.rdf4j', name: 'rdf4j-repository-sail', version: '3.5.0'
+    implementation group: 'org.eclipse.rdf4j', name: 'rdf4j-sail-memory', version: '3.5.0'
+
+    implementation group: 'org.eclipse.rdf4j', name: 'rdf4j-rio-api', version: '3.5.0'
+    implementation group: 'org.eclipse.rdf4j', name: 'rdf4j-rio-rdfjson', version: '3.5.0'
+    implementation group: 'org.eclipse.rdf4j', name: 'rdf4j-rio-jsonld', version: '3.5.0'
+    implementation group: 'org.eclipse.rdf4j', name: 'rdf4j-rio-rdfxml', version: '3.5.0'
+    implementation group: 'org.eclipse.rdf4j', name: 'rdf4j-rio-ntriples', version: '3.5.0'
+    implementation group: 'org.eclipse.rdf4j', name: 'rdf4j-rio-nquads', version: '3.5.0'
+    implementation group: 'org.eclipse.rdf4j', name: 'rdf4j-rio-n3', version: '3.5.0'
+    implementation group: 'org.eclipse.rdf4j', name: 'rdf4j-queryresultio-sparqljson', version: '3.5.0'
+    implementation group: 'org.eclipse.rdf4j', name: 'rdf4j-repository-api', version: '3.5.0'
+    implementation group: 'org.eclipse.rdf4j', name: 'rdf4j-repository-sparql', version: '3.5.0'
+    implementation(group: 'org.eclipse.rdf4j', name: 'rdf4j-http-client', version: '3.5.0')
+            {
+                exclude group: 'org.slf4j'
+                exclude group: 'ch.qos.logback'
+            }
+    implementation project(':common-sdip:sdip-error-codes')
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.11.2'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.mock-server:mockserver-netty:5.8.1'
+
+}
+
+bootJar {
+    archiveFileName = "${archiveBaseName.get()}.${archiveExtension.get()}"
+}
+
+jar {
+    enabled = true
+}
+
+tasks.withType(JavaExec).configureEach {
+    jvmArgs = ['-Xms4g', '-Xmx6g', '-Xss1g']
+}
+
+tasks.withType(Jar) { duplicatesStrategy = DuplicatesStrategy.EXCLUDE }
