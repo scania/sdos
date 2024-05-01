@@ -50,7 +50,7 @@ App with required roles. Upload flow graph in Named Graph(in ofg database). Exam
 Make sure Stardog supports OIDC and also enable these option for stardog Databases. 
 
 * security.named.graphs: false
-* query.all.graphs: false
+* query.all.graphs: true
 * search.enabled: true
 ## Building
 
