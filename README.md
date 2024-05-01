@@ -46,8 +46,12 @@ UPDATE NEEDED
 
 Create Azure App for both SDOS & Stardog. Create Stardog Azure App as mobile application in Azure. Register SDOS App as client 
 application with required scopes in Stardog App. Then add User in both SDOS App and Stardog 
-App with required roles.
+App with required roles. Upload flow graph in Named Graph(in ofg database). Example Flow Graph can be found [here](https://github.com/scania/sdos-orchestration-flow-graph/blob/main/Pizza/OFG_Pizza.ttl). 
+Make sure Stardog supports OIDC and also enable these option for stardog Databases. 
 
+* security.named.graphs: false
+* query.all.graphs: false
+* search.enabled: true
 ## Building
 
 1. Clone the project from gitlab.
