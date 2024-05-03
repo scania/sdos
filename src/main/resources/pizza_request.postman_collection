@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "eaa24bb2-13c7-48af-9130-8727b9456c36",
+		"name": "SDOS_collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32961194"
+	},
+	"item": [
+		{
+			"name": "getAllAvailableTasks",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "access_token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8050/sdos/getAllAvailableTasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8050",
+					"path": [
+						"sdos",
+						"getAllAvailableTasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "runOrchestration",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"subjectIri\": \"https://kg.scania.com/it/iris_orchestration/OWLNamedIndividual_a65f0c37_d8df_4c0a_b8d3_814c94c2d66b\",\r\n    \"parameters\": [{\r\n            \"label\": \"param_pizza_size\",\r\n            \"keyValuePairs\": [{\r\n                    \"key\": \"size\",\r\n                    \"value\": \"30cm\"\r\n                }\r\n            ]\r\n        }, {\r\n            \"label\": \"param_allergenes_credential\",\r\n            \"keyValuePairs\": [{\r\n                    \"key\": \"username\",\r\n                    \"value\": \"testuser\"\r\n                }, {\r\n                    \"key\": \"password\",\r\n                    \"value\": \"welcome123\"\r\n                }\r\n            ]\r\n        }, {\r\n            \"label\": \"param_pizza_credential\",\r\n            \"keyValuePairs\": [{\r\n                    \"key\": \"username\",\r\n                    \"value\": \"testuser\"\r\n                }, {\r\n                    \"key\": \"password\",\r\n                    \"value\": \"welcome123\"\r\n                }\r\n            ]\r\n        }, {\r\n            \"label\": \"param_itemId\",\r\n            \"keyValuePairs\": [{\r\n                    \"key\": \"itemId\",\r\n                    \"value\": \"57625634\"\r\n                }\r\n            ]\r\n        }, {\r\n            \"label\": \"param_stardog_credential\",\r\n            \"keyValuePairs\": [{\r\n                    \"key\": \"username\",\r\n                    \"value\": \"test-user\"\r\n                }, {\r\n                    \"key\": \"password\",\r\n                    \"value\": \"test_@user\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8050/sdos/runOrchestration",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8050",
+					"path": [
+						"sdos",
+						"runOrchestration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "runOrchestrationSync",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "access_token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"subjectIri\": \"https://kg.scania.com/it/iris_orchestration/OWLNamedIndividual_a65f0c37_d8df_4c0a_b8d3_814c94c2d66b\",\r\n    \"parameters\": [{\r\n            \"label\": \"param_pizza_size\",\r\n            \"keyValuePairs\": [{\r\n                    \"key\": \"size\",\r\n                    \"value\": \"20\"\r\n                }\r\n            ]\r\n        }, {\r\n            \"label\": \"param_itemId\",\r\n            \"keyValuePairs\": [{\r\n                    \"key\": \"itemId\",\r\n                    \"value\": \"2321\"\r\n                }\r\n            ]\r\n        }, {\r\n            \"label\": \"param_pizza_credential\",\r\n            \"keyValuePairs\": [{\r\n                    \"key\": \"username\",\r\n                    \"value\": \"test\"\r\n                }, {\r\n                    \"key\": \"password\",\r\n                    \"value\": \"test\"\r\n                }\r\n            ]\r\n        }, {\r\n            \"label\": \"param_stardog_credential\",\r\n            \"keyValuePairs\": [{\r\n                    \"key\": \"username\",\r\n                    \"value\": \"test-user\"\r\n                }, {\r\n                    \"key\": \"password\",\r\n                    \"value\": \"test_@user\"\r\n                }\r\n            ]\r\n        }, {\r\n            \"label\": \"param_allergenes_credential\",\r\n            \"keyValuePairs\": [{\r\n                    \"key\": \"username\",\r\n                    \"value\": \"test\"\r\n                }, {\r\n                    \"key\": \"password\",\r\n                    \"value\": \"test\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8050/sdos/runOrchestrationSync",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8050",
+					"path": [
+						"sdos",
+						"runOrchestrationSync"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

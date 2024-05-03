@@ -32,8 +32,6 @@ be configured by passing the values as environment variable)**
 
 ## Prerequisites
 
-UPDATE NEEDED
-
 - Java jdk 17 (for building and running the application)
 - Stardog >= 9.x (RDF db for saving the knowledge graph)
 - Github (to download the source code)
@@ -47,7 +45,7 @@ UPDATE NEEDED
 Create Azure App for both SDOS & Stardog. Create [Stardog Azure App](https://github.com/Stardog-union/launchpad-docs/blob/main/azure/access-token-passthrough-mode.md#how-to-register-the-Stardog-application) as mobile application in Azure. Register SDOS App as client 
 application with required scopes in Stardog App. Then add User in both SDOS App and Stardog 
 App with required roles. Upload flow graph in Named Graph(in ofg database). Example Flow Graph can be found [here](https://github.com/scania/sdos-orchestration-flow-graph/blob/main/Pizza/OFG_Pizza.ttl). 
-Make sure Stardog supports OIDC and also enable these option for Stardog Databases. 
+Make sure Stardog supports OIDC and also enable these option for Stardog Databases. Example SDOS request postman collection for Pizza usecase can be found [here](https://github.com/scania/sdos/tree/main/src/main/resources/pizza_request.postman_collection)
 
 * security.named.graphs: false
 * query.all.graphs: true
@@ -90,19 +88,20 @@ Run it as any other jar file to get the usage output:
 
 This should produce the following output:
 
-      usage: sdos -b <arg> [-h] [-id <arg>] -ofg <arg> -r <arg> -esUrl <arg>
-      -b,--StardogBaseUrl <arg>   the baseUrl for a Stardog endpoint, this
-      option is mandatory.
-      -h,--help
-      -id,--serviceId <arg>                  A unique identifier for this service, this option is mandatory.
-      -ofg,--ofgDb <arg>                     A unique identifier for orchestration database name in Stardog, this 
-                                             option is mandatory.
-      -r,--resultDb <arg>                    A unique identifier for result database name in Stardog, this option is 
-                                             mandatory.
-      -tpSize,--threadPoolSize <arg>         The thread pool size to initialize the Thread Executor service.
-      -clientSecret,--sdosClientSecret <arg> SDOS Azure app client secret used for Azure communication.
-      -clientScope,--StardogClientScope <arg> Stardog client scope that SDOS can use for token exchange.
-      -tenantId,--azureTenantId <arg>        Tenant id used for Azure communication.
+    
+      usage: sdos -b <arg> -clientScope <arg> -clientSecret <arg> [-h] [-id <arg>] -ofg <arg> -r <arg> -tenantId <arg> [-tpSize <arg>]
+      -b,--stardogBaseUrl <arg>                 the baseUrl for a stardog endpoint, this option is mandatory.
+      -clientScope,--stardogClientScope <arg>   Stardog client scope that SDOS can use for token exchange, this option is mandatory.
+      -clientSecret,--sdosClientSecret <arg>    SDOS Azure app client secret used for Azure communication, this option is mandatory.
+      -h,--help                                 Show the information about the arguments
+      -id,--serviceId <arg>                     A unique identifier for this service, this option is mandatory.
+      -ofg,--ofgDb <arg>                        A unique identifier for orchestration database name in stardog, this option is mandatory.
+      -r,--resultDb <arg>                       A unique identifier for result database name in stardog, this option is mandatory.
+      -tenantId,--azureTenantId <arg>           Tenant id used for Azure communication, this option is mandatory.
+      -tpSize,--threadPoolSize <arg>            the thread pool size to initialize the Thread Executor, this option is optional.
+
+
+
 
 ### Arguments
 
