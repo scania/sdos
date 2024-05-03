@@ -1,0 +1,36 @@
+{
+  "tasks": [
+    {
+      "subjectIri": null,
+      "label": "label",
+      "parameters": [
+        {
+          "label": "label1",
+          "keyValuePairs": [
+            {
+              "key": "password",
+              "value": ""
+            },
+            {
+              "key": "userName",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "label": "label2",
+          "keyValuePairs": [
+            {
+              "key": "endpoint",
+              "value": ""
+            },
+            {
+              "key": "httpHeader",
+              "value": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

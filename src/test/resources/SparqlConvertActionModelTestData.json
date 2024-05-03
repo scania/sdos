@@ -1,0 +1,40 @@
+[
+  {
+    "nextaction": {
+      "type": "uri",
+      "value": "next/action/IRI"
+    },
+    "inputparametertype": {
+      "type": "uri",
+      "value": "anInputParameterType"
+    },
+    "inputparameter": {
+      "type": "uri",
+      "value": "anInputParameter"
+    },
+    "nextactiontype": {
+      "type": "uri",
+      "value": "aNextActionType"
+    },
+    "outputparameter": {
+      "type": "uri",
+      "value": "anOutputParameter"
+    },
+    "label": {
+      "type": "literal",
+      "value": "aLabel"
+    },
+    "constructSparql": {
+      "type": "literal",
+      "value": "aQuery"
+    },
+    "outputparametertype": {
+      "type": "uri",
+      "value": "anOutputParameterType"
+    },
+    "hasConnector": {
+      "type": "uri",
+      "value": "aConnectorURI"
+    }
+  }
+]

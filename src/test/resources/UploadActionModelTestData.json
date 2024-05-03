@@ -1,0 +1,61 @@
+[
+  {
+    "inputparameter": {
+      "type": "uri",
+      "value": "https://atest#SYSTEMA"
+    },
+    "inputparametertype": {
+      "type": "uri",
+      "value": "https://ahttptest#SYSTEMA"
+    },
+    "system": {
+      "type": "uri",
+      "value": "https://atest#SYSTEMA"
+    },
+    "connector": {
+      "type": "uri",
+      "value": "https://atest#daconnecta"
+    },
+    "connectortype": {
+      "type": "uri",
+      "value": "https://atest#HTTPConnector"
+    },
+    "hasConnector": {
+      "type": "uri",
+      "value": "https://atest#daconnecta"
+    },
+    "nextaction": {
+      "type": "uri",
+      "value": "https://atest#daactiona"
+    },
+    "nextactiontype": {
+      "type": "uri",
+      "value": "https://atest#ScriptAction"
+    },
+    "actionid": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "1"
+    },
+    "httpHeader": {
+      "type": "literal",
+      "value": "{\n\"Content-Type\":\"application/ld+json\",\n\"Accept\": \"*/*\",\n\"username\":\"user1\",\n\"password\":\"welcome\"\n}"
+    },
+    "httpBody": {
+      "type": "literal",
+      "value": "body"
+    },
+    "graph": {
+      "type": "literal",
+      "value": "http://graph/"
+    },
+    "endpoint": {
+      "type": "literal",
+      "value": "/atest"
+    },
+    "label": {
+      "type" : "literal",
+      "value": "aLabel"
+    }
+  }
+]

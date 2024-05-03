@@ -1,0 +1,46 @@
+[
+  {
+    "nextaction": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "3"
+    },
+    "scripttype": {
+      "type": "uri",
+      "value": "https://kg.scania.com/it/iris_orchestration/GroovyScript"
+    },
+    "inputparametertype": {
+      "type": "uri",
+      "value": "https://kg.scania.com/it/iris_orchestration/Parameter"
+    },
+    "inputparameter": {
+      "type": "uri",
+      "value": "https://kg.scania.com/it/iris_orchestration/PARAM_POLARION_RAW"
+    },
+    "nextactiontype": {
+      "type": "uri",
+      "value": "https://kg.scania.com/it/iris_orchestration/ResultAction"
+    },
+    "actionid": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "actionId1"
+    },
+    "outputparameter": {
+      "type": "uri",
+      "value": "https://kg.scania.com/it/iris_orchestration/PARAM_SCRIPT1_OUTPUT"
+    },
+    "outputparametertype": {
+      "type": "uri",
+      "value": "https://kg.scania.com/it/iris_orchestration/HTTPParameter"
+    },
+    "script": {
+      "type": "uri",
+      "value": "https://kg.scania.com/it/iris_orchestration/SCRIPT1"
+    },
+    "label": {
+      "type" : "literal",
+      "value": "aLabel"
+    }
+  }
+]

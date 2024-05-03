@@ -1,0 +1,45 @@
+[
+  {
+    "soapOperation": {
+      "type": "literal",
+      "value": "aSoapOpera"
+    },
+    "nextaction": {
+      "type": "uri",
+      "value": "https://atest#daactiona"
+    },
+    "inputparameter": {
+      "type": "uri",
+      "value": "https://kg.scania.com/it/iris_orchestration/PARAM_POLARION_WORKITEM"
+    },
+    "inputparametertype": {
+      "type": "uri",
+      "value": "https://kg.scania.com/it/iris_orchestration/StandardParameter"
+    },
+    "nextactiontype": {
+      "type": "uri",
+      "value": "https://atest#VirtualGraphAction"
+    },
+    "actionid": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "actionId1"
+    },
+    "outputparameter": {
+      "type": "uri",
+      "value": "https://kg.scania.com/it/iris_orchestration/PARAM_POLARION_RAW"
+    },
+    "outputparametertype": {
+      "type": "uri",
+      "value": "https://kg.scania.com/it/iris_orchestration/Parameter"
+    },
+    "hasConnector": {
+      "type": "uri",
+      "value": "aConnectorURI"
+    },
+    "label": {
+      "type" : "literal",
+      "value": "aLabel"
+    }
+  }
+]

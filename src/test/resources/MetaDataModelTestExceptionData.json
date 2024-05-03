@@ -1,0 +1,41 @@
+[
+  {
+    "creator": {
+      "type": "literal",
+      "value": "testCreator"
+    },
+    "graphType": {
+      "type": "literal",
+      "value": "namedGraph"
+    },
+    "contributor": {
+      "type": "literal",
+      "value": "testContributor"
+    },
+    "ooVersion": {
+      "type": "literal",
+      "value": "1.0.0"
+    },
+    "description": {
+      "type": "literal",
+      "value": "testDescription"
+    },
+    "title": {
+      "type": "literal",
+      "value": "testTitle"
+    },
+    "permanentService": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#boolean",
+      "type": "literal",
+      "value": "false"
+    },
+    "timestamp": {
+      "type": "literal",
+      "value": "testTime"
+    },
+    "label": {
+      "type": "literal",
+      "value": "testLabel"
+    }
+  }
+]

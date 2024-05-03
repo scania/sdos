@@ -1,0 +1,12 @@
+﻿[
+  {
+    "script": {
+      "type": "literal",
+      "value": "VARIABLE"
+    },
+    "label": {
+      "type" : "literal",
+      "value": "aLabel"
+    }
+  }
+]

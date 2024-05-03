@@ -1,0 +1,22 @@
+[
+  {
+    "p": {
+      "type": "uri",
+      "value": "http://kg.scania.com/part#nameLong"
+    },
+    "o": {
+      "type": "literal",
+      "value": "test_nameLong"
+    }
+  },
+  {
+    "p": {
+      "type": "uri",
+      "value": "http://kg.scania.com/part#hasDefiningDocument"
+    },
+    "o": {
+      "type": "bnode",
+      "value": "test_definingDoc"
+    }
+  }
+]

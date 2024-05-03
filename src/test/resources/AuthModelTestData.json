@@ -1,0 +1,36 @@
+[
+  {
+    "wsdlFile": {
+      "type": "literal",
+      "value": "aWsdlFile"
+    },
+    "label": {
+      "type": "literal",
+      "value": "aWsdlFile"
+    },
+    "soapOperation": {
+      "type": "literal",
+      "value": "aSoapOpera"
+    },
+    "inputparametertype": {
+      "type": "uri",
+      "value": "https://kg.scania.com/it/iris_orchestration/Parameter"
+    },
+    "scripttype": {
+      "type": "uri",
+      "value": "aScriptType"
+    },
+    "inputparameter": {
+      "type": "uri",
+      "value": "https://kg.scania.com/it/iris_orchestration/PARAM_SOAP_PASSWORD"
+    },
+    "bindingName": {
+      "type": "literal",
+      "value": "SessionWebServiceSoapBinding"
+    },
+    "script": {
+      "type": "uri",
+      "value": "aScriptIri"
+    }
+  }
+]

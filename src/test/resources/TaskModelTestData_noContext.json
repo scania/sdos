@@ -1,0 +1,65 @@
+[
+  {
+    "inputparameter": {
+      "type": "uri",
+      "value": "https://ahttptest#SYSTEMA"
+    },
+    "label": {
+      "type": "uri",
+      "value": "Task1"
+    },
+    "task": {
+      "type": "uri",
+      "value": "https://kg.scania.com/it/iris_orchestration/Task1"
+    },
+    "inputparametertype": {
+      "type": "uri",
+      "value": "https://ahttptest#SYSTEMA"
+    },
+    "system": {
+      "type": "uri",
+      "value": "https://atest#SYSTEMA"
+    },
+    "connector": {
+      "type": "uri",
+      "value": "https://atest#daconnecta"
+    },
+    "connectortype": {
+      "type": "uri",
+      "value": "https://atest#HTTPConnector"
+    },
+    "nextaction": {
+      "type": "uri",
+      "value": "https://atest#daactiona"
+    },
+    "nextactiontype": {
+      "type": "uri",
+      "value": "https://atest#ScriptAction"
+    },
+    "actionid": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "1"
+    },
+    "httpHeader": {
+      "type": "literal",
+      "value": "HEADER"
+    },
+    "httpBody": {
+      "type": "literal",
+      "value": "body"
+    },
+    "task": {
+      "type": "uri",
+      "value": "https://kg.scania.com/it/iris_orchestration/Task1"
+    },
+    "graph": {
+      "type": "literal",
+      "value": "http://graph/"
+    },
+    "metadata": {
+      "type": "literal",
+      "value": "testMetadata"
+    }
+  }
+]

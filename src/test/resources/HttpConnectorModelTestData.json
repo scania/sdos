@@ -1,0 +1,8 @@
+﻿[
+  {
+    "baseUrl": {
+      "type": "literal",
+      "value": "anEpicURL"
+    }
+  }
+]

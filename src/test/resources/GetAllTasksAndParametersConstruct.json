@@ -1,0 +1,220 @@
+{
+  "@context": {
+    "core": "http://kg.scania.com/core/",
+    "@vocab": "https://kg.scania.com/it/iris_orchestration/"
+  },
+  "@graph": [
+    {
+      "@id": "OWLNamedIndividual_a65f0c37_d8df_4c0a_b8d3_814c94c2d66b",
+      "@type": "Task",
+      "inputParameter": {
+        "@id": "OWLNamedIndividual_3a45ce92_cb98_42b6_bf1b_9cc25465238e"
+      },
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@value": "task_pizza",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_3a45ce92_cb98_42b6_bf1b_9cc25465238e",
+      "@type": "BasicCredentialsParameter",
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@value": "param_pizza_credential",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_a65f0c37_d8df_4c0a_b8d3_814c94c2d66b",
+      "inputParameter": {
+        "@id": "OWLNamedIndividual_b0c714de_39af_4eba_afa6_86c34de1307e"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_b0c714de_39af_4eba_afa6_86c34de1307e",
+      "@type": "BasicCredentialsParameter",
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@value": "param_allergenes_credential",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_a65f0c37_d8df_4c0a_b8d3_814c94c2d66b",
+      "inputParameter": {
+        "@id": "OWLNamedIndividual_b0113089_b0ca_46b2_9a39_809932e10af7"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_b0113089_b0ca_46b2_9a39_809932e10af7",
+      "@type": "StandardParameter",
+      "paramName": {
+        "@value": "itemId"
+      },
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@value": "param_itemId",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_a65f0c37_d8df_4c0a_b8d3_814c94c2d66b",
+      "inputParameter": {
+        "@id": "OWLNamedIndividual_4f1605c9_3e0c_4dd3_9073_bc36c928b79e"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_4f1605c9_3e0c_4dd3_9073_bc36c928b79e",
+      "@type": "StandardParameter",
+      "paramName": {
+        "@value": "size"
+      },
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@value": "param_pizza_size",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_a65f0c37_d8df_4c0a_b8d3_814c94c2d66b",
+      "inputParameter": {
+        "@id": "OWLNamedIndividual_5f935e41_7129_4262_b54b_87298dc18fbb"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_5f935e41_7129_4262_b54b_87298dc18fbb",
+      "@type": "BasicCredentialsParameter",
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@value": "param_stardog_credential",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_ab822765_6fef_40ce_8144_cc543aa7b694",
+      "@type": "Task",
+      "inputParameter": {
+        "@id": "f7ca504f_0283_4de2_a251_dd2a7f1b6256"
+      },
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@value": "task_allergenes",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "f7ca504f_0283_4de2_a251_dd2a7f1b6256",
+      "@type": "BasicCredentialsParameter",
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@value": "param_stardog_credential",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_ab822765_6fef_40ce_8144_cc543aa7b694",
+      "inputParameter": {
+        "@id": "OWLNamedIndividual_90bbe923_291e_418d_b63a_d3ab6aa36672"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_90bbe923_291e_418d_b63a_d3ab6aa36672",
+      "@type": "BasicCredentialsParameter",
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@value": "param_allergenes_credentials",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_ab822765_6fef_40ce_8144_cc543aa7b694",
+      "inputParameter": {
+        "@id": "OWLNamedIndividual_997456fb_368d_4b06_b641_60451348d459"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_997456fb_368d_4b06_b641_60451348d459",
+      "@type": "StandardParameter",
+      "paramName": {
+        "@value": "itemId"
+      },
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@value": "param_itemId",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_31c6e207_4c59_4e2d_b024_d0aa2c4ed571",
+      "@type": "Task",
+      "inputParameter": {
+        "@id": "OWLNamedIndividual_8bb37653_b8aa_4e6b_8d8c_c1c5f7390d2e"
+      },
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@value": "task_pizza_local",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_8bb37653_b8aa_4e6b_8d8c_c1c5f7390d2e",
+      "@type": "BasicCredentialsParameter",
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@value": "param_pizza_credential",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_31c6e207_4c59_4e2d_b024_d0aa2c4ed571",
+      "inputParameter": {
+        "@id": "OWLNamedIndividual_9e82f718_01e6_454f_afb1_2a011974fbae"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_9e82f718_01e6_454f_afb1_2a011974fbae",
+      "@type": "BasicCredentialsParameter",
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@value": "param_allergenes_credential",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_31c6e207_4c59_4e2d_b024_d0aa2c4ed571",
+      "inputParameter": {
+        "@id": "OWLNamedIndividual_4fcbb86d_d1c7_43ac_9d40_acc5a53945fb"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_4fcbb86d_d1c7_43ac_9d40_acc5a53945fb",
+      "@type": "StandardParameter",
+      "paramName": {
+        "@value": "itemId"
+      },
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@value": "param_itemId",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_31c6e207_4c59_4e2d_b024_d0aa2c4ed571",
+      "inputParameter": {
+        "@id": "OWLNamedIndividual_ec05ff53_1fd3_45fc_8847_17ca8f2dfb2c"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_ec05ff53_1fd3_45fc_8847_17ca8f2dfb2c",
+      "@type": "StandardParameter",
+      "paramName": {
+        "@value": "size"
+      },
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@value": "param_pizza_size",
+        "@language": "en"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_31c6e207_4c59_4e2d_b024_d0aa2c4ed571",
+      "inputParameter": {
+        "@id": "OWLNamedIndividual_11e063cf_23dd_4042_91bc_ae63996bfd7b"
+      }
+    },
+    {
+      "@id": "OWLNamedIndividual_11e063cf_23dd_4042_91bc_ae63996bfd7b",
+      "@type": "BasicCredentialsParameter",
+      "http://www.w3.org/2000/01/rdf-schema#label": {
+        "@value": "param_stardog_credential",
+        "@language": "en"
+      }
+    }
+  ]
+}

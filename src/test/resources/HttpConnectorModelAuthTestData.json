@@ -1,0 +1,20 @@
+﻿[
+  {
+    "baseUrl": {
+      "type": "literal",
+      "value": "anEpicURL"
+    },
+    "hasAuthenticationMethod": {
+      "type": "literal",
+      "value": "anAuthMethod"
+    },
+    "hasAuthenticationMethodType": {
+      "type": "literal",
+      "value": "anAuthMethodType"
+    },
+    "label": {
+      "type" : "literal",
+      "value": "aLabel"
+    }
+  }
+]

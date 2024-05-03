@@ -1,0 +1,12 @@
+[
+  {
+    "label": {
+      "type": "literal",
+      "value": "param_query_part"
+    },
+    "query": {
+      "type": "literal",
+      "value": "select * where {?s ?p ?o. }"
+    }
+  }
+]

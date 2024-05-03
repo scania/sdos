@@ -1,0 +1,32 @@
+[
+  {
+    "value": {
+      "type": "literal",
+      "value": "TestValue"
+    },
+    "enableReasoner": {
+      "type": "literal",
+      "value": false
+    },
+    "label": {
+      "type": "literal",
+      "value": "testLabel"
+    },
+    "nextactiontype": {
+      "type": "uri",
+      "value": "aNextActionType"
+    },
+    "nextaction": {
+      "type": "uri",
+      "value": "next/action/IRI"
+    },
+    "outputparameter": {
+      "type": "uri",
+      "value": "anOutputParameter"
+    },
+    "outputparametertype": {
+      "type": "uri",
+      "value": "anOutputParameterType"
+    }
+  }
+]

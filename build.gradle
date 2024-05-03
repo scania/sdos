@@ -5,7 +5,7 @@ plugins {
     id 'org.barfuin.gradle.jacocolog' version '3.1.0'
 }
 
-group = 'com.scania.sdip'
+group = 'com.scania.sdos'
 version = '0.0.1-SNAPSHOT'
 apply plugin: 'maven-publish'
 java {
@@ -113,6 +113,9 @@ bootJar {
 
 jar {
     enabled = true
+}
+test {
+    useJUnitPlatform()
 }
 
 tasks.withType(JavaExec).configureEach {

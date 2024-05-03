@@ -1,0 +1,12 @@
+[
+  {
+    "label": {
+      "type": "literal",
+      "value": "PARAM_TEST"
+    },
+    "value": {
+      "type": "literal",
+      "value": "{\n\"userName\":[\"USER\",\"USER1\"],\n\"password\":[\"PASS\",\"PASS1\"]\n}"
+    }
+  }
+]

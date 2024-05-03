@@ -1,0 +1,12 @@
+[
+  {
+    "label": {
+      "type": "literal",
+      "value": "aLabel"
+    },
+    "context": {
+      "type": "literal",
+      "value": "{\n\"@context\": {\n\"@vocab\": \"http://champ.scania.com/scaniapart#\",\n\"man\": \"http://champ.scania.com/manpart/\",\n\"navistar\": \"http://champ.scania.com/navistarpart/\",\n\"xsd\": \"http://www.w3.org/2001/XMLSchema#\",\n\"owl\": \"http://www.w3.org/2002/07/owl#\",\n\"owl:sameAs\": {\n\"@type\": \"@id\"\n}\n}\n}"
+    }
+  }
+]

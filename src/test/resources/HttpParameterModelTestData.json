@@ -1,0 +1,31 @@
+﻿[
+  {
+    "value": {
+      "type": "literal",
+      "value": {
+        "type": "literal",
+        "value": "TestValue"
+      }
+    },
+    "httpBody": {
+      "type": "literal",
+      "value": "TestBody"
+    },
+    "httpHeader": {
+      "type": "literal",
+      "value": "TestHeader"
+    },
+    "endpoint": {
+      "type": "literal",
+      "value": "TestEndpoint"
+    },
+    "httpQueryParameter": {
+      "type": "literal",
+      "value": "TestQueryParameter"
+    },
+    "label": {
+      "type": "literal",
+      "value": "label"
+    }
+  }
+]

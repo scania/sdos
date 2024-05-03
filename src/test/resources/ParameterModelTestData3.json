@@ -1,0 +1,12 @@
+[
+  {
+    "label": {
+      "type": "literal",
+      "value": "PARAM_TEST"
+    },
+    "paramName": {
+      "type": "literal",
+      "value": "userName"
+    }
+  }
+]

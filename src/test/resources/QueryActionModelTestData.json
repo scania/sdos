@@ -1,0 +1,40 @@
+[
+  {
+    "value": {
+      "type": "literal",
+      "value": "TestValue"
+    },
+    "enableReasoner": {
+      "type": "literal",
+      "value": true
+    },
+    "label": {
+      "type": "literal",
+      "value": "testLabel"
+    },
+    "inputparametertype": {
+      "type": "uri",
+      "value": "anInputParameterType"
+    },
+    "inputparameter": {
+      "type": "uri",
+      "value": "anInputParameter"
+    },
+    "nextactiontype": {
+      "type": "uri",
+      "value": "aNextActionType"
+    },
+    "nextaction": {
+      "type": "uri",
+      "value": "next/action/IRI"
+    },
+    "outputparameter": {
+      "type": "uri",
+      "value": "anOutputParameter"
+    },
+    "outputparametertype": {
+      "type": "uri",
+      "value": "anOutputParameterType"
+    }
+  }
+]

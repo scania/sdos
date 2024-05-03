@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <JsonLayout compact="true" complete="true" eventEol="true"/>
+      <!--<JsonLayout eventEol="true"  complete="true" compact="true"> </JsonLayout>-->
+    </Console>
+
+    <RollingFile fileName="./logs/sdip-sdos-test.log"
+      filePattern="./logs/$${date:yyyy-MM}/sdip-sdos-test-%d{-dd-MMMM-yyyy}-%i.log.gz"
+      name="RollingFile">
+      <JsonLayout compact="false" complete="false" eventEol="false"/>
+      <Policies>
+        <OnStartupTriggeringPolicy/>
+        <SizeBasedTriggeringPolicy size="10 MB"/>
+        <TimeBasedTriggeringPolicy/>
+      </Policies>
+    </RollingFile>
+  </Appenders>
+
+  <Loggers>
+    <AsyncLogger additivity="false" level="debug"
+      name="com.scania.sdip">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="RollingFile"/>
+    </AsyncLogger>
+    <Logger level="trace" name="com.scania.sdip.sdos.Log4jTest"/>
+  </Loggers>
+
+</Configuration>

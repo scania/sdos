@@ -1,0 +1,41 @@
+[
+  {
+    "httpHeader": {
+      "type": "literal",
+      "value": ""
+    },
+    "endpoint": {
+      "type": "literal",
+      "value": "/an/endpoint/"
+    },
+    "httpBody": {
+      "type": "literal",
+      "value": ""
+    },
+    "nextaction": {
+      "type": "uri",
+      "value": "next/action/IRI"
+    },
+    "nextactiontype": {
+      "type": "uri",
+      "value": "aNextActionType"
+    },
+    "actionid": {
+      "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+      "type": "literal",
+      "value": "anId"
+    },
+    "httpQueryParameter": {
+      "type": "literal",
+      "value": ""
+    },
+    "hasConnector": {
+      "type": "uri",
+      "value": "aConnectorURI"
+    },
+    "label": {
+      "type": "literal",
+      "value": "alabel"
+    }
+  }
+]

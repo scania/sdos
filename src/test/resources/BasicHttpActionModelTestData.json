@@ -1,0 +1,16 @@
+﻿[
+  {
+    "label": {
+      "type": "literal",
+      "value": "alabel"
+    },
+    "inputparametertype": {
+      "type": "uri",
+      "value": "anInputParameterType"
+    },
+    "inputparameter": {
+      "type": "uri",
+      "value": "anInputParameter"
+    }
+  }
+]

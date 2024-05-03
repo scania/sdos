@@ -1,0 +1,28 @@
+﻿[
+  {
+    "task": {
+      "type": "uri",
+      "value": "https://kg.scania.com/it/iris_orchestration/Task1"
+    },
+    "nextaction": {
+      "type": "uri",
+      "value": "https://kg.scania.com/it/iris_orchestration/ACTION_GET_POLARION_WORKITEM"
+    },
+    "inputparametertype": {
+      "type": "uri",
+      "value": "https://kg.scania.com/it/iris_orchestration/StandardParameter"
+    },
+    "inputparameter": {
+      "type": "uri",
+      "value": "https://kg.scania.com/it/iris_orchestration/PARAM_POLARION_WORKITEM"
+    },
+    "nextactiontype": {
+      "type": "uri",
+      "value": "https://kg.scania.com/it/iris_orchestration/SOAPAction"
+    },
+    "context": {
+      "type": "literal",
+      "value": "{\n  \"@context\": {\n    \"cccmi\": \"http://cccmi.scania.com/demo/wp5#\",\n    \"owl\": \"http://www.w3.org/2002/07/owl#\",\n    \"rdfs\": \"http://www.w3.org/2000/01/rdf-schema#\",\n    \"rdf\": \"http://www.w3.org/1999/02/22-rdf-syntax-ns#\",\n    \"baseNameSpace\": \"cccmi\",\n    \"cccmi:introCo\": {\n      \"@type\": \"@id\"\n    },\n    \"cccmi:contains\": {\n      \"@type\": \"@id\"\n    },\n    \"cccmi:hasAlternative\": {\n      \"@type\": \"@id\"\n    },\n    \"cccmi:hasVariantCode\": {\n      \"@type\": \"@id\"\n    },\n    \"cccmi:hasPart\":{\n      \"@type\": \"@id\"\n    },\n    \"cccmi:revisionOf\" : {\n      \"@type\" : \"@id\"\n    },\n    \"cccmi:usesPort\" : {\n      \"@type\": \"@id\"\n    },\n    \"has_time_carrier\": {\n      \"@id\": \"cccmi:hasTimeCarrier\",\n      \"@type\": \"@id\"\n    },\n    \"has_scn\": {\n      \"@id\": \"cccmi:hasScenario\",\n      \"@type\": \"@id\"\n    },\n    \"has_uc\": {\n      \"@id\": \"cccmi:hasUseCase\",\n      \"@type\": \"@id\"\n    },\n    \"has_eco\": {\n      \"@id\": \"cccmi:hasECO\",\n      \"@type\": \"@id\"\n    },\n    \"has_intro_co\": {\n      \"@id\": \"cccmi:hasIntroCo\",\n      \"@type\": \"@id\"\n    },\n    \"uf\": {\n      \"@id\": \"cccmi:UserFunction\",\n      \"@type\": \"@id\"\n    },\n    \"DevelopmentUserfunction\": {\n      \"@id\": \"cccmi:UserFunction\",\n      \"@type\": \"@id\"\n    },\n    \"uc\": {\n      \"@id\": \"cccmi:UseCase\",\n      \"@type\": \"@id\"\n    },\n    \"eco\": {\n      \"@id\": \"cccmi:Eco\",\n      \"@type\": \"@id\"\n    },\n    \"scn\": {\n      \"@id\": \"cccmi:Scenario\",\n      \"@type\": \"@id\"\n    },\n    \"time_carrier\": {\n      \"@id\": \"cccmi:TimeCarrier\",\n      \"@type\": \"@id\"\n    },\n    \"intro_co\": {\n      \"@id\": \"cccmi:IntroCo\",\n      \"@type\": \"@id\"\n    },\n    \"WorkItem\": {\n      \"@id\": \"cccmi:WorkItem\",\n      \"@type\": \"@id\"\n    },\n    \"hasPart\":{\n      \"@id\": \"cccmi:hasPart\",\n      \"@type\": \"@id\"\n    },\n    \"revisionOf\" : {\n      \"@id\" : \"cccmi:revisionOf\",\n      \"@type\" : \"@id\"\n    },\n    \"usesPort\" : {\n      \"@id\" : \"cccmi:usesPort\",\n      \"@type\" : \"@id\"\n    }\n  }\n}"
+    }
+  }
+]

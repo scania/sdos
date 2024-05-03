@@ -1,0 +1,108 @@
+﻿{
+  "@context": {
+    "cccmi": "http://cccmi.scania.com/demo/wp5#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "baseNameSpace": "cccmi",
+    "cccmi:introCo": {
+      "@type": "@id"
+    },
+    "cccmi:contains": {
+      "@type": "@id"
+    },
+    "cccmi:hasAlternative": {
+      "@type": "@id"
+    },
+    "cccmi:hasVariantCode": {
+      "@type": "@id"
+    },
+    "cccmi:hasPart": {
+      "@type": "@id"
+    },
+    "cccmi:revisionOf": {
+      "@type": "@id"
+    },
+    "cccmi:usesPort": {
+      "@type": "@id"
+    },
+    "has_time_carrier": {
+      "@id": "cccmi:hasTimeCarrier",
+      "@type": "@id"
+    },
+    "has_scn": {
+      "@id": "cccmi:hasScenario",
+      "@type": "@id"
+    },
+    "has_uc": {
+      "@id": "cccmi:hasUseCase",
+      "@type": "@id"
+    },
+    "has_eco": {
+      "@id": "cccmi:hasECO",
+      "@type": "@id"
+    },
+    "has_intro_co": {
+      "@id": "cccmi:hasIntroCo",
+      "@type": "@id"
+    },
+    "uf": {
+      "@id": "cccmi:UserFunction",
+      "@type": "@id"
+    },
+    "DevelopmentUserfunction": {
+      "@id": "cccmi:UserFunction",
+      "@type": "@id"
+    },
+    "uc": {
+      "@id": "cccmi:UseCase",
+      "@type": "@id"
+    },
+    "eco": {
+      "@id": "cccmi:Eco",
+      "@type": "@id"
+    },
+    "scn": {
+      "@id": "cccmi:Scenario",
+      "@type": "@id"
+    },
+    "time_carrier": {
+      "@id": "cccmi:TimeCarrier",
+      "@type": "@id"
+    },
+    "intro_co": {
+      "@id": "cccmi:IntroCo",
+      "@type": "@id"
+    },
+    "WorkItem": {
+      "@id": "cccmi:WorkItem",
+      "@type": "@id"
+    },
+    "hasPart": {
+      "@id": "cccmi:hasPart",
+      "@type": "@id"
+    },
+    "revisionOf": {
+      "@id": "cccmi:revisionOf",
+      "@type": "@id"
+    },
+    "usesPort": {
+      "@id": "cccmi:usesPort",
+      "@type": "@id"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "cccmi:WorkItem-Test11-2",
+      "@type": "WorkItem",
+      "cccmi:unresolvable": "false",
+      "cccmi:type": "WorkItem",
+      "cccmi:uri": "/default/Test11${WorkItem}Test11-2",
+      "cccmi:contains": [
+        "cccmi:eco-283793",
+        "cccmi:uf-18",
+        "cccmi:duf-18"
+      ]
+    }
+  ]
+}

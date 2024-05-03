@@ -1,7 +1,7 @@
 # SDOS
 
 Semantic Data Orchestration Service. This service is used for running orchestration flow graph and store the rdf data 
-to stardog.
+to Stardog.
 
 ## System Components
 
@@ -14,20 +14,20 @@ defines rules, options and restriction to create flow
 graphs). These flow graph instance can be executed to get data from specific systems and transform the data to knowledge
 graph(rdf) and store it in a result graph. 
 
-It is integrated with Azure AD to support SSO(Single-SignOn). It also supports the OBO flow(On-behalf Of). So user can 
-use their AD credentials to access the application. 
+It is integrated with Microsoft Entra ID(Azure AD) to support SSO(Single-SignOn). So user can use their AD credentials to access 
+the application. SDOS also supports the Azure AD OBO flow(On-behalf Of) to access the triple store(Stardog DB). 
 
-## How does SDOS works?
+## How does SDOS work?
 * when SDOS receives the request, first it validates the token. Token will be verified using the signature. Once the token
-  has been verified, it fetches the OBO token.  
+  has been verified, it fetches the OBO token for accessing Stardog.  
 
 * Using the OBO token SDOS calls Stardog to read the OFG. SDOS uses the subject iri in the request to fetch the OFG.
 
 * It starts the execution based on OFG.
 
-* Finally push the tranformed RDF data into Stardog Named graph
+* Finally push the tranformed RDF data into Stardog Named graph. It also returns the transformed RDF data in requested format as response, if the request is made for synchronous endpoint. 
 
-**(The value of database where the OFG's are stored and the database where it pushes the data into stardog and Azure AD details can 
+**(The value of database where the OFG's are stored and the database where it pushes the data into Stardog and Azure AD details can 
 be configured by passing the values as environment variable)**
 
 ## Prerequisites
@@ -44,20 +44,20 @@ UPDATE NEEDED
 # QuickStart
 ## Technical Note
 
-Create Azure App for both SDOS & Stardog. Create Stardog Azure App as mobile application in Azure. Register SDOS App as client 
+Create Azure App for both SDOS & Stardog. Create [Stardog Azure App](https://github.com/Stardog-union/launchpad-docs/blob/main/azure/access-token-passthrough-mode.md#how-to-register-the-Stardog-application) as mobile application in Azure. Register SDOS App as client 
 application with required scopes in Stardog App. Then add User in both SDOS App and Stardog 
 App with required roles. Upload flow graph in Named Graph(in ofg database). Example Flow Graph can be found [here](https://github.com/scania/sdos-orchestration-flow-graph/blob/main/Pizza/OFG_Pizza.ttl). 
-Make sure Stardog supports OIDC and also enable these option for stardog Databases. 
+Make sure Stardog supports OIDC and also enable these option for Stardog Databases. 
 
 * security.named.graphs: false
 * query.all.graphs: true
 * search.enabled: true
 ## Building
 
-1. Clone the project from gitlab.
+1. Clone the project from github.
 
    ```
-   gh repo clone scania/sdos
+   git clone https://github.com/scania/sdos.git
    ```
 
 2. Go to the root of the project
@@ -91,41 +91,39 @@ Run it as any other jar file to get the usage output:
 This should produce the following output:
 
       usage: sdos -b <arg> [-h] [-id <arg>] -ofg <arg> -r <arg> -esUrl <arg>
-      -b,--stardogBaseUrl <arg>   the baseUrl for a stardog endpoint, this
+      -b,--StardogBaseUrl <arg>   the baseUrl for a Stardog endpoint, this
       option is mandatory.
       -h,--help
       -id,--serviceId <arg>                  A unique identifier for this service, this option is mandatory.
-      -ofg,--ofgDb <arg>                     A unique identifier for orchestration database name in stardog, this 
+      -ofg,--ofgDb <arg>                     A unique identifier for orchestration database name in Stardog, this 
                                              option is mandatory.
-      -r,--resultDb <arg>                    A unique identifier for result database name in stardog, this option is 
+      -r,--resultDb <arg>                    A unique identifier for result database name in Stardog, this option is 
                                              mandatory.
       -tpSize,--threadPoolSize <arg>         The thread pool size to initialize the Thread Executor service.
       -clientSecret,--sdosClientSecret <arg> SDOS Azure app client secret used for Azure communication.
-      -clientScope,--stardogClientScope <arg> Stardog client scope that SDOS can use for token exchange.
-      -tenantId,--AzureTenantId <arg>        Tenant id used for Azure communication.
+      -clientScope,--StardogClientScope <arg> Stardog client scope that SDOS can use for token exchange.
+      -tenantId,--azureTenantId <arg>        Tenant id used for Azure communication.
 
 ### Arguments
 
 All Arguments will be listed below. Not all arguments are mandatory for the service to run but may
 be needed for special cases and needs.
 
-| Program Argument      | MANDATORY               | Description                                                                                                                       | Allowed Values         | Image-build-command                                       | Environment Name   |
-|-----------------------|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------|------------------------|-----------------------------------------------------------|--------------------| 
-| stardogBaseUrl        | True                    | The base-url of stardog.                                                                                                          | a url                  | --build-arg stardogBaseUrl=http://localhost:8080          | stardog_url        |
-| serviceId             | True                    | A unique identifier for this service.                                                                                             | a unique name          | --build-arg serviceId=SDOS                                | serviceIdVar       |
-| result                | True                    | The name of result database name.                                                                                                 | a unique name          | --build-arg resultDb=result                               | resultDbNameVar    |
-| ofg                   | True                    | The name of Orchestration database name.                                                                                          | a unique name          | --build-arg ofgDb=ofg                                     | ofgDbName          |
-| build_version_tag     | False                   | This argument is used to show current sdip version in the swagger page.                                                           | version tag            | --build-arg build_version_tag=4.0.0                       | version_tag        |
-| build_environment_tag | False                   | This argument is used to show current sdip environment tag in the swagger page.                                                   | environment name       | --build-arg build_environment_tag=sandbox                 | environment_tag    |
-| build_service_url     | False (True with Https) | This argument Sets the base url which swagger will use to curl. This is mandatory is you want to use the swagger page with https. | https base url         | --build-arg build_service_url=https://localhost:8050/sdos | service_url        |
-| tpSize                | True                    | The thread pool size to initialize the Thread Executor                                                                            | number                 | --build-arg threadPoolSize=100                            | threadPool_Size    |
-| sdosClientSecret      | True                    | SDOS Client Secret used to fetch OBO token for Stardog                                                                            | Azure App secret       | --build-arg sdosClientSecret=<app_secret>                 | sdosClientSecret   |
-| stardogClientScope    | True                    | Stardog client scope where SDOS is registered with to get OBO token                                                               | Stardog Client scope   | --build-arg stardogClientScope=<stardog_clientScope>      | stardogClientScope |
-| AzureTenantId         | True                    | Tenant id used for Azure communication                                                                                            | Scania Azure tenant id | --build-arg=<tenant_id>                                   | azureTenantId      |
+| Program Argument   | MANDATORY               | Description                                                                                                                       | Allowed Values       |
+|--------------------|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------|----------------------| 
+| StardogBaseUrl     | True                    | The base-url of Stardog.                                                                                                          | a url                |
+| StardogClientScope | True                    | Stardog client scope where SDOS is registered with to get OBO token                                                               | Stardog Client scope |
+| sdosClientSecret   | True                    | SDOS Client Secret used to fetch OBO token for Stardog                                                                            | Azure App secret     |
+| serviceId          | True                    | A unique identifier for this service.                                                                                             | a unique name        |
+| ofgDb              | True                    | The name of Orchestration database name.                                                                                          | a unique name        |
+| resultDb           | True                    | The name of result database name.                                                                                                 | a unique name        |
+| azureTenantId      | True                    | Tenant id used for Azure communication                                                                                            | Azure tenant id      |
+| threadPoolSize     | True                    | The thread pool size to initialize the Thread Executor                                                                            | number               | 
+
 
 Follow the usage and provide mandatory arguments. 
 
-   Ex. java -jar sdos.jar -id SDOS -ofg <ofg_db_name> -r <result_db_name> -tpSize <threadpool_size> -clientSecret <sdos_clientsecret> -clientScope <clientScope_Stardog> -tenantId <azure_tenant_id>
+   Ex. java -jar sdos.jar -id SDOS -b <Stardog_Base_url> -ofg <ofg_db_name> -r <result_db_name> -tpSize <threadpool_size> -clientSecret <sdos_clientsecret> -clientScope <clientScope_Stardog> -tenantId <azure_tenant_id>
 
 The application should now start.
 
@@ -134,8 +132,10 @@ at http://localhost:8050/sdos/swagger-ui.html
 
 ## Support
 
-If you face any issues, find any bugs or have any questions regarding the application the SDP
-development team is available through mail [sdos@scania.com](mailto:sdos@scania.com)
+If you face any issues, find any bugs or have any questions regarding the application the SDOS
+development team is available through mail [sdos@scania.com](mailto:sdos@scania.com).
+
+[Community Page](https://github.com/scania/sdos/discussions) is also available for the discussion.
 
 ## Quick links
 
@@ -145,6 +145,9 @@ development team is available through mail [sdos@scania.com](mailto:sdos@scania.
 
 [Token signature validation](https://www.voitanos.io/blog/validating-entra-id-generated-oauth-tokens/)
 
+[Stardog github for setting up Azure](https://github.com/Stardog-union/launchpad-docs/blob/main/azure/access-token-passthrough-mode.md#how-to-register-the-Stardog-application)
+
+
 
 ## License
-SDOS is licensed under Affero General Public License 3.0 
+SDOS is licensed under [Affero General Public License 3.0](https://github.com/scania/sdos/blob/main/LICENSE) 

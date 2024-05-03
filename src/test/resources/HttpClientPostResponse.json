@@ -1,0 +1,22 @@
+﻿{
+  "task": {
+    "type": "uri",
+    "value": "https://kg.scania.com/it/iris_orchestration/Task1"
+  },
+  "nextaction": {
+    "type": "uri",
+    "value": "https://kg.scania.com/it/iris_orchestration/ACTION_GET_POLARION_WORKITEM"
+  },
+  "inputparametertype": {
+    "type": "uri",
+    "value": "https://kg.scania.com/it/iris_orchestration/StandardParameter"
+  },
+  "inputparameter": {
+    "type": "uri",
+    "value": "https://kg.scania.com/it/iris_orchestration/PARAM_POLARION_WORKITEM"
+  },
+  "nextactiontype": {
+    "type": "uri",
+    "value": "https://kg.scania.com/it/iris_orchestration/SOAPAction"
+  }
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "label": {
+      "type": "literal",
+      "value": "PARAM_SOAP_LOGIN"
+    },
+    "paramName": {
+      "type": "literal",
+      "value": "password"
+    }
+  }
+]

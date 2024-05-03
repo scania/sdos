@@ -1,0 +1,24 @@
+[
+  {
+    "wsdlFile": {
+      "type": "literal",
+      "value": "aWsdlFile"
+    },
+    "hasAuthenticationMethod": {
+      "type": "uri",
+      "value": "anAuthenticationMethod"
+    },
+    "hasAuthenticationMethodType": {
+      "type": "uri",
+      "value": "anAuthenticationMethodType"
+    },
+    "bindingName": {
+      "type": "literal",
+      "value": "TrackerWebServiceSoapBinding"
+    },
+    "label": {
+      "type" : "literal",
+      "value": "aLabel"
+    }
+  }
+]
