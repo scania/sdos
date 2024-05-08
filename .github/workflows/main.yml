@@ -64,15 +64,15 @@ jobs:
       #   run: gradle build
 
 
-        - uses: actions/upload-artifact@master
-          with:
-            name: jar-file
-            path: build/libs/sdos.jar
+      - uses: actions/upload-artifact@master
+        with:
+          name: jar-file
+          path: build/libs/sdos.jar
   
-        - uses: actions/download-artifact@master
-          with:
-            name: jar-file
-            path: build/libs/sdos.jar
+      - uses: actions/download-artifact@master
+        with:
+          name: jar-file
+          path: build/libs/sdos.jar
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
