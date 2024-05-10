@@ -22,7 +22,7 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
-  TG: ${{ basename(github.ref) }}
+  TG: docker-pipeline
 
 
 jobs:
