@@ -42,6 +42,15 @@ jobs:
         with:
           submodules: 'true'
           token: ${{ secrets.PAT_TOKEN }}
+          
+      - name: 'Dependency Review'
+        uses: actions/dependency-review-action@v4
+        # Commonly enabled options, see https://github.com/actions/dependency-review-action#configuration-options for all available options.
+        with:
+          comment-summary-in-pr: always
+        #   fail-on-severity: moderate
+        #   deny-licenses: GPL-1.0-or-later, LGPL-2.0-or-later
+        #   retry-on-snapshot-warnings: true
       # - name: 'Dependency Review'
       #   if: github.event_name == 'workflow_dispatch'
       #   uses: actions/dependency-review-action@v4
