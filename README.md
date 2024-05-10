@@ -15,7 +15,9 @@ graphs). These flow graph instance can be executed to get data from specific sys
 graph(rdf) and store it in a result graph. 
 
 It is integrated with Microsoft Entra ID(Azure AD) to support SSO(Single-SignOn). So user can use their AD credentials to access 
-the application. SDOS also supports the Azure AD OBO flow(On-behalf Of) to access the triple store(Stardog DB). 
+the application. SDOS also supports the Azure AD OBO flow(On-behalf Of) to access the triple store(Stardog DB).
+
+[Video explanation](https://github.com/scania/sdos/tree/main/doc/resources)
 
 ## How does SDOS work?
 * when SDOS receives the request, first it validates the token. Token will be verified using the signature. Once the token
@@ -132,7 +134,7 @@ at http://localhost:8050/sdos/swagger-ui.html
 ## Support
 
 If you face any issues, find any bugs or have any questions regarding the application the SDOS
-development team is available through mail [sdos@scania.com](mailto:sdos@scania.com).
+development team is available through mail [sdos@scania.com](mailto:sdos@scania.com)
 
 [Community Page](https://github.com/scania/sdos/discussions) is also available for the discussion.
 
