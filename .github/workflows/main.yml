@@ -22,7 +22,7 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
-  TG: ${{ github.ref#refs/heads/ }}
+  TG: ${{ basename(github.ref) }}
 
 
 jobs:
