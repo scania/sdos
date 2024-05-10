@@ -42,6 +42,7 @@ jobs:
           submodules: 'true'
           token: ${{ secrets.PAT_TOKEN }}
       - name: 'Dependency Review'
+        if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.ref == 'docker-pipeline'
         uses: actions/dependency-review-action@v4
           
       - name: Set up JDK 17
