@@ -183,8 +183,7 @@ jobs:
           output: 'dependency-results.json'
           github-pat: ${{ secrets.GITHUB_TOKEN }} # or ${{ secrets.github_pat_name }} if you're using a PAT
           severity: "MEDIUM,HIGH,CRITICAL"
-          scanners: "vuln"
-		  
+          scanners: "vuln"	  
       # # Sign the resulting Docker image digest except on PRs.
       # # This will only write to the public Rekor transparency log when the Docker
       # # repository is public to avoid leaking data.  If you would like to publish
