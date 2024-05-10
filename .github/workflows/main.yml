@@ -46,6 +46,14 @@ jobs:
         uses: actions/dependency-review-action@v4
         with:
           base-ref: 'docker-pipeline'
+
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: java, python
+          
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+
           
       - name: Set up JDK 17
         uses: actions/setup-java@v4
