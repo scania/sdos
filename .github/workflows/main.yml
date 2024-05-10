@@ -71,23 +71,23 @@ jobs:
       - name: Run Trivy scanner
         uses: aquasecurity/trivy-action@master
         with:
-          scan-type: repo
-          hide-progress: true
-          output: trivy.txt
+          scan-type: 'repo'
+          # hide-progress: true
+          # output: trivy.txt
 
-      - name: Publish Trivy Output to Summary
-        run: |
-          if [[ -s trivy.txt ]]; then
-            {
-              echo "### Security Output"
-              echo "<details><summary>Click to expand</summary>"
-              echo ""
-              echo '```terraform'
-              cat trivy.txt
-              echo '```'
-              echo "</details>"
-            } >> $GITHUB_STEP_SUMMARY
-          fi
+      # - name: Publish Trivy Output to Summary
+      #   run: |
+      #     if [[ -s trivy.txt ]]; then
+      #       {
+      #         echo "### Security Output"
+      #         echo "<details><summary>Click to expand</summary>"
+      #         echo ""
+      #         echo '```terraform'
+      #         cat trivy.txt
+      #         echo '```'
+      #         echo "</details>"
+      #       } >> $GITHUB_STEP_SUMMARY
+      #     fi
           
       - name: Run Codacy Analysis CLI
         uses: codacy/codacy-analysis-cli-action@master
@@ -177,8 +177,8 @@ jobs:
       - name: Scan image in a private registry
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}}"
-          scan-type: image
+          image-ref: "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}}"
+          scan-type: 'image'
           format: 'github'
           output: 'dependency-results.json'
           github-pat: ${{ secrets.GITHUB_TOKEN }} # or ${{ secrets.github_pat_name }} if you're using a PAT
