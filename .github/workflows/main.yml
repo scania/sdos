@@ -12,8 +12,8 @@ on:
     branches: [ "docker-pipeline" ]
   #   # Publish semver tags as releases.
   #   tags: [ 'v*.*.*' ]
-  # pull_request:
-  #   branches: [ "docker-pipeline" ]
+  pull_request:
+    branches: [ "docker-pipeline" ]
     # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -22,6 +22,7 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
+  TG: ${{ github.ref#refs/heads/ }}
 
 
 jobs:
@@ -42,6 +43,15 @@ jobs:
         with:
           submodules: 'true'
           token: ${{ secrets.PAT_TOKEN }}
+          
+      # - name: 'Dependency Review'
+      #   uses: actions/dependency-review-action@v4
+      #   # Commonly enabled options, see https://github.com/actions/dependency-review-action#configuration-options for all available options.
+      #   with:
+      #     comment-summary-in-pr: always
+        #   fail-on-severity: moderate
+        #   deny-licenses: GPL-1.0-or-later, LGPL-2.0-or-later
+        #   retry-on-snapshot-warnings: true
       # - name: 'Dependency Review'
       #   if: github.event_name == 'workflow_dispatch'
       #   uses: actions/dependency-review-action@v4
@@ -58,6 +68,27 @@ jobs:
       # - name: Perform CodeQL Analysis
       #   uses: github/codeql-action/analyze@v3
 
+      - name: Run Trivy scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: repo
+          hide-progress: true
+          output: trivy.txt
+
+      - name: Publish Trivy Output to Summary
+        run: |
+          if [[ -s trivy.txt ]]; then
+            {
+              echo "### Security Output"
+              echo "<details><summary>Click to expand</summary>"
+              echo ""
+              echo '```terraform'
+              cat trivy.txt
+              echo '```'
+              echo "</details>"
+            } >> $GITHUB_STEP_SUMMARY
+          fi
+          
       - name: Run Codacy Analysis CLI
         uses: codacy/codacy-analysis-cli-action@master
         
@@ -142,18 +173,29 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-
-      # Sign the resulting Docker image digest except on PRs.
-      # This will only write to the public Rekor transparency log when the Docker
-      # repository is public to avoid leaking data.  If you would like to publish
-      # transparency data even for private images, pass --force to cosign below.
-      # https://github.com/sigstore/cosign
-      - name: Sign the published Docker image
-        if: ${{ github.event_name != 'pull_request' }}
-        env:
-          # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
-          TAGS: ${{ steps.meta.outputs.tags }}
-          DIGEST: ${{ steps.build-and-push.outputs.digest }}
-        # This step uses the identity token to provision an ephemeral certificate
-        # against the sigstore community Fulcio instance.
-        run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
+          
+      - name: Scan image in a private registry
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}}"
+          scan-type: image
+          format: 'github'
+          output: 'dependency-results.json'
+          github-pat: ${{ secrets.GITHUB_TOKEN }} # or ${{ secrets.github_pat_name }} if you're using a PAT
+          severity: "MEDIUM,HIGH,CRITICAL"
+          scanners: "vuln"
+		  
+      # # Sign the resulting Docker image digest except on PRs.
+      # # This will only write to the public Rekor transparency log when the Docker
+      # # repository is public to avoid leaking data.  If you would like to publish
+      # # transparency data even for private images, pass --force to cosign below.
+      # # https://github.com/sigstore/cosign
+      # - name: Sign the published Docker image
+      #   if: ${{ github.event_name != 'pull_request' }}
+      #   env:
+      #     # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
+      #     TAGS: ${{ steps.meta.outputs.tags }}
+      #     DIGEST: ${{ steps.build-and-push.outputs.digest }}
+      #   # This step uses the identity token to provision an ephemeral certificate
+      #   # against the sigstore community Fulcio instance.
+      #   run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
