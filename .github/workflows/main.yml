@@ -72,6 +72,7 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'repo'
+          github-pat: ${{ secrets.GITHUB_TOKEN }}
           # hide-progress: true
           # output: trivy.txt
 
