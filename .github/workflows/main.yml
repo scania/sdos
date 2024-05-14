@@ -71,8 +71,12 @@ jobs:
       - name: Run Trivy scanner
         uses: aquasecurity/trivy-action@master
         with:
-          scan-type: 'repo'
+          scan-type: 'fs'
           github-pat: ${{ secrets.GITHUB_TOKEN }}
+          ignore-unfixed: true
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL'
           # hide-progress: true
           # output: trivy.txt
 
