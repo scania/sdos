@@ -52,11 +52,11 @@ jobs:
         #   fail-on-severity: moderate
         #   deny-licenses: GPL-1.0-or-later, LGPL-2.0-or-later
         #   retry-on-snapshot-warnings: true
-      # - name: 'Dependency Review'
-      #   if: github.event_name == 'workflow_dispatch'
-      #   uses: actions/dependency-review-action@v4
-      #   with:
-      #     base-ref: 'docker-pipeline'
+      - name: 'Dependency Review'
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/dependency-review-action@v4
+        with:
+          base-ref: 'docker-pipeline'
 
       # - uses: github/codeql-action/init@v3
       #   with:
@@ -68,17 +68,17 @@ jobs:
       # - name: Perform CodeQL Analysis
       #   uses: github/codeql-action/analyze@v3
 
-      - name: Run Trivy scanner
-        uses: aquasecurity/trivy-action@master
-        with:
-          scan-type: 'fs'
-          github-pat: ${{ secrets.GITHUB_TOKEN }}
-          ignore-unfixed: true
-          format: 'sarif'
-          output: 'trivy-results.sarif'
-          severity: 'CRITICAL'
-          # hide-progress: true
-          # output: trivy.txt
+      # - name: Run Trivy scanner
+      #   uses: aquasecurity/trivy-action@master
+      #   with:
+      #     scan-type: 'fs'
+      #     github-pat: ${{ secrets.GITHUB_TOKEN }}
+      #     ignore-unfixed: true
+      #     format: 'sarif'
+      #     output: 'trivy-results.sarif'
+      #     severity: 'CRITICAL'
+      #     # hide-progress: true
+      #     # output: trivy.txt
 
       # - name: Publish Trivy Output to Summary
       #   run: |
@@ -93,7 +93,24 @@ jobs:
       #         echo "</details>"
       #       } >> $GITHUB_STEP_SUMMARY
       #     fi
-          
+
+##########################################################################
+      - name: Run Trivy vulnerability scanner in repo mode
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          ignore-unfixed: true
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+ ##############################################         
+
       - name: Run Codacy Analysis CLI
         uses: codacy/codacy-analysis-cli-action@master
         
@@ -184,11 +201,18 @@ jobs:
         with:
           image-ref: "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}}"
           scan-type: 'image'
-          format: 'github'
-          output: 'dependency-results.json'
+          format: 'sarif'
+          output: 'trivy-results-image.sarif'
           github-pat: ${{ secrets.GITHUB_TOKEN }} # or ${{ secrets.github_pat_name }} if you're using a PAT
           severity: "MEDIUM,HIGH,CRITICAL"
-          scanners: "vuln"	  
+          scanners: "vuln"	 
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: 'trivy-results-image.sarif'
+
       # # Sign the resulting Docker image digest except on PRs.
       # # This will only write to the public Rekor transparency log when the Docker
       # # repository is public to avoid leaking data.  If you would like to publish
