@@ -195,23 +195,34 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          
-      - name: Scan image in a private registry
-        uses: aquasecurity/trivy-action@master
+
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
         with:
-          image-ref: "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}}"
-          scan-type: 'image'
-          format: 'sarif'
-          output: 'trivy-results-image.sarif'
-          github-pat: ${{ secrets.GITHUB_TOKEN }} # or ${{ secrets.github_pat_name }} if you're using a PAT
-          severity: "MEDIUM,HIGH,CRITICAL"
-          scanners: "vuln"	 
+          image-ref: '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}}'
+          format: 'template'
+          template: '@/contrib/sarif.tpl'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
-        if: always()
         with:
-          sarif_file: 'trivy-results-image.sarif'
+          sarif_file: 'trivy-results.sarif'
+          
+      # - name: Scan image in a private registry
+      #   uses: aquasecurity/trivy-action@master
+      #   with:
+      #     image-ref: "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}}"
+      #     scan-type: 'image'
+      #     format: 'sarif'
+      #     output: 'trivy-results-image.sarif'
+      #     github-pat: ${{ secrets.GITHUB_TOKEN }} # or ${{ secrets.github_pat_name }} if you're using a PAT
+      #     severity: "MEDIUM,HIGH,CRITICAL"
+      #     scanners: "vuln"	 
+
+
 
       # # Sign the resulting Docker image digest except on PRs.
       # # This will only write to the public Rekor transparency log when the Docker
