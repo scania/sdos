@@ -207,7 +207,8 @@ jobs:
           template: '@/contrib/sarif.tpl'
           output: 'trivy-results.sarif'
           severity: 'CRITICAL,HIGH'
-          token: ${{ secrets.PAT_TOKEN }}
+          github-pat: ${{ secrets.PAT_TOKEN }}
+          docker-host: ///var/run/docker.sock
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
