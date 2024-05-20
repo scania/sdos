@@ -182,7 +182,7 @@ jobs:
         gradle-version: 8.5
 
   docker-build:
-
+    needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: write
