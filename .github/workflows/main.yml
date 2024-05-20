@@ -190,10 +190,6 @@ jobs:
       security-events: write
       actions: read
     steps:
-      - uses: actions/download-artifact@master
-        with:
-          name: jar-file
-          path: build/libs
 
       - uses: actions/checkout@v4
       - name: Set up JDK 17
@@ -201,6 +197,11 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+
+      - uses: actions/download-artifact@master
+        with:
+          name: jar-file
+          path: build/libs
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
