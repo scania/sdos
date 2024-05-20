@@ -46,6 +46,9 @@ jobs:
           submodules: 'true'
           token: ${{ secrets.PAT_TOKEN }}
           
+      - name: validating gradlle
+        uses: gradle/actions/wrapper-validation@v3
+          
       # - name: 'Dependency Review'
       #   uses: actions/dependency-review-action@v4
       #   # Commonly enabled options, see https://github.com/actions/dependency-review-action#configuration-options for all available options.
@@ -121,6 +124,9 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+
+      - name: Generate and submit dependency graph
+        uses: gradle/actions/dependency-submission@v3
 
       # Configure Gradle for optimal use in GiHub Actions, including caching of downloaded dependencies.
       # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
