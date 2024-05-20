@@ -196,6 +196,9 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - uses: actions/download-artifact@master
+        with:
+          name: jar-file
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
       - name: Install cosign
