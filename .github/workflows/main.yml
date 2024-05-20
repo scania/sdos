@@ -104,10 +104,12 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'
-          ignore-unfixed: true
           format: 'sarif'
           output: 'trivy-results.sarif'
           severity: 'CRITICAL,LOW,MEDIUM,HIGH'
+          vuln-type: 'os,library'
+          scanners: 'vuln,secret'
+          
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
@@ -260,6 +262,8 @@ jobs:
           severity: 'CRITICAL,HIGH,MEDIUM,LOW'
           github-pat: ${{ secrets.PAT_TOKEN }}
           docker-host: //var/run/docker.sock
+          vuln-type: 'os,library'
+          scanners: 'vuln,secret'
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
