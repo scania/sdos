@@ -107,7 +107,7 @@ jobs:
           ignore-unfixed: true
           format: 'sarif'
           output: 'trivy-results.sarif'
-          severity: 'CRITICAL'
+          severity: 'CRITICAL,LOW,MEDIUM,HIGH'
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
@@ -257,9 +257,9 @@ jobs:
           format: 'template'
           template: '@/contrib/sarif.tpl'
           output: 'trivy-results.sarif'
-          severity: 'CRITICAL,HIGH,MEDIUM'
+          severity: 'CRITICAL,HIGH,MEDIUM,LOW'
           github-pat: ${{ secrets.PAT_TOKEN }}
-          docker-host: ///var/run/docker.sock
+          docker-host: //var/run/docker.sock
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
