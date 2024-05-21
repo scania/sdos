@@ -183,6 +183,9 @@ jobs:
       with:
         # Use a particular Gradle version instead of the configured wrapper.
         gradle-version: 8.5
+        
+    - name: Perform dependency review
+      uses: actions/dependency-review-action@v3
 
   docker-build:
     needs: build
