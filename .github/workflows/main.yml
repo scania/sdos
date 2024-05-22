@@ -129,6 +129,16 @@ jobs:
 
       - name: Run chmod to make gradlew executable
         run: chmod +x ./gradlew
+
+      - name: check
+        run: |
+          ./gradlew dependencyCheckAnalyze
+
+      - name: upload check
+        uses: actions/upload-artifact@v2
+        with:
+          name: dependency-check-report
+          path: ${{ gihub.workspace }}/build/reports/dependency-check-report.html
         
       - name: Set up Gradle Build Action
         uses: gradle/gradle-build-action@v3
