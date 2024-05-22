@@ -74,7 +74,7 @@ public class ApacheCommonsCliArgumentParser implements IArgumentParser {
     options.addOption(option);
 
     options.addOption(option);
-    option = new Option("h", "help", false, "");
+    option = new Option("h", "help", false, "Show the information about the arguments");
     options.addOption(option);
 
     if (Arrays.stream(args).anyMatch(arg -> "--help".equals(arg) || "-h".equals(arg))) {
