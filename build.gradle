@@ -3,6 +3,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'org.barfuin.gradle.jacocolog' version '3.1.0'
+    id 'org.owasp.dependencycheck' version '6.0.2'
 }
 
 group = 'com.scania.sdos'
