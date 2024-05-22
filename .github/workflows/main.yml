@@ -132,7 +132,7 @@ jobs:
 
       - name: check
         run: |
-          ./gradlew dependencyCheckAnalyze
+          ./gradlew dependencyCheckAnalyze --debug
 
       - name: upload check
         uses: actions/upload-artifact@v2
