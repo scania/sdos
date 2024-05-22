@@ -1,12 +1,12 @@
 name: dependency-review
 
 on:
-  # pull_request:
-  #   branches: [ "docker-pipeline" ]
-    # Allows you to run this workflow manually from the Actions tab
-  workflow_run:
-    workflows: ['name: Download and submit dependency graph']
-    types: [completed]
+  pull_request:
+    branches: [ "docker-pipeline" ]
+  # Allows you to run this workflow manually from the Actions tab
+  # workflow_run:
+  #   workflows: ['name: Download and submit dependency graph']
+  #   types: [completed]
 permissions:
   contents: read
 
