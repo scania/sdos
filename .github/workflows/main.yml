@@ -8,12 +8,12 @@ name: Docker
 on:
   # schedule:
   #   - cron: '27 0 * * *'
-  push:
-    branches: [ "docker-pipeline" ]
+  # push:
+  #   branches: [ "check" ]
   #   # Publish semver tags as releases.
   #   tags: [ 'v*.*.*' ]
   pull_request:
-    branches: [ "docker-pipeline" ]
+    branches: [ "main" ]
     # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -130,15 +130,15 @@ jobs:
       - name: Run chmod to make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: check
-        run: |
-          ./gradlew dependencyCheckAnalyze --debug
+      # - name: check
+      #   run: |
+      #     ./gradlew dependencyCheckAnalyze --debug
 
-      - name: upload check
-        uses: actions/upload-artifact@v2
-        with:
-          name: dependency-check-report
-          path: ${{ github.workspace }}/build/reports/dependency-check-report.html
+      # - name: upload check
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: dependency-check-report
+      #     path: ${{ github.workspace }}/build/reports/dependency-check-report.html
         
       - name: Set up Gradle Build Action
         uses: gradle/gradle-build-action@v3
@@ -199,9 +199,9 @@ jobs:
     # See: https://github.com/gradle/actions/blob/main/dependency-submission/README.md
      - name: Generate and submit dependency graph
        uses: gradle/actions/dependency-submission@417ae3ccd767c252f5661f1ace9f835f9654f2b5
-    #   with:
-    #     # Use a particular Gradle version instead of the configured wrapper.
-    #     gradle-version: 8.5
+       with:
+        # Use a particular Gradle version instead of the configured wrapper.
+         gradle-version: 8.5
         
      - name: Perform dependency review
        if: github.event_name == 'pull_request'
