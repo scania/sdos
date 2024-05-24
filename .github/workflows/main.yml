@@ -28,7 +28,9 @@ jobs:
           cache-disabled: true
           
       - name: Build and test with Gradle
-        run: ./gradlew build
+        run: |
+          chmod +x ./gradlew
+          ./gradlew build
 
 
   submit-and-review:
