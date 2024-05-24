@@ -21,8 +21,9 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
       - name: Build with Gradle
-        run: ./gradlew build
-
+        run: |
+          chmod +x ./gradlew
+          ./gradlew build
 
   dependency-submission:
     runs-on: ubuntu-latest
