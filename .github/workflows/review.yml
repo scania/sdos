@@ -2,7 +2,8 @@ name: dependency-review
 
 on:
   pull_request:
-    branches: [ "docker-pipeline" ]
+    #branches: [ "docker-pipeline" ]
+    branches: [ "chk" ]
   # Allows you to run this workflow manually from the Actions tab
   # workflow_run:
   #   workflows: ['name: Download and submit dependency graph']
