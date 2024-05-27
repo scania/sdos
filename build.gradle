@@ -4,6 +4,7 @@ plugins {
     id 'java'
     id 'org.barfuin.gradle.jacocolog' version '3.1.0'
     id 'org.owasp.dependencycheck' version '6.0.2'
+    id 'com.gradle.enterprise' version '3.16.2'
 }
 
 group = 'com.scania.sdos'
@@ -122,3 +123,13 @@ tasks.withType(JavaExec).configureEach {
 }
 
 tasks.withType(Jar) { duplicatesStrategy = DuplicatesStrategy.EXCLUDE }
+
+gradleEnterprise {
+    if (System.getenv("CI") != null) {
+        buildScan {
+            publishAlways()
+            termsOfServiceUrl = "https://gradle.com/terms-of-service"
+            termsOfServiceAgree = "yes"
+        }
+    }
+}
