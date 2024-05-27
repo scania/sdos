@@ -62,6 +62,11 @@ jobs:
         with:
           name: code-quality-report
           path: gl-code-quality-report.json
+          
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'gl-code-quality-report.sarif'
 
   dependency_scanning:
     runs-on: ubuntu-latest
@@ -82,8 +87,13 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'
-          format: 'json'
-          output: 'gl-dependency-scanning-report.json'
+          format: 'sarif'
+          output: 'gl-dependency-scanning-report.sarif'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'gl-dependency-scanning-report.sarif'
 
       - name: Upload Dependency Scanning Report
         uses: actions/upload-artifact@v3
