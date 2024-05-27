@@ -46,6 +46,10 @@ jobs:
         java-version: 17
     - name: Generate and submit dependency graph
       uses: gradle/actions/dependency-submission@v3
+      with: 
+         build-scan-publish: true 
+         build-scan-terms-of-service-url: "https://gradle.com/terms-of-service" 
+         build-scan-terms-of-service-agree: "yes" 
       
   submit-and-review:
       runs-on: ubuntu-latest
