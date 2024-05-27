@@ -29,8 +29,6 @@ jobs:
         run: |
           chmod +x ./gradlew
           CI=true ./gradlew build --scan
-      - name: Check Gradle
-        run: |
           ./gradlew dependencyCheckAnalyze --info
 
   dependency-submission:
