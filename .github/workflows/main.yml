@@ -28,7 +28,7 @@ jobs:
       - name: Build with Gradle
         run: |
           chmod +x ./gradlew
-          ./gradlew build --scan
+          CI=true ./gradlew build --scan
 
   dependency-submission:
     runs-on: ubuntu-latest
