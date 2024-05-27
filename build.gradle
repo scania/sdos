@@ -23,9 +23,6 @@ configurations {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
         implementation.exclude group: "org.slf4j", module: "slf4j-log4j12"
     }
-    configure<org.owasp.dependencycheck.gradle.extension.DependencyCheckExtension> {
-    format = org.owasp.dependencycheck.reporting.ReportGenerator.Format.ALL.toString()
-   }
 }
 
 repositories {
