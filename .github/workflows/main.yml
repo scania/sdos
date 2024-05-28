@@ -148,13 +148,20 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: TruffleHog OSS
-        id: trufflehog
+      # - name: TruffleHog OSS
+      #   id: trufflehog
+      #   uses: trufflesecurity/trufflehog@main
+      #   continue-on-error: true
+      #   with:
+      #     path: ./
+      #     base: test
+      #     head: HEAD
+      #     extra_args: --debug
+
+      - name: scan-push
         uses: trufflesecurity/trufflehog@main
-        continue-on-error: true
         with:
-          path: ./
-          base: test
-          head: HEAD
-          extra_args: --debug
+          base: ""
+          head: ${{ github.ref_name }}
+          extra_args: --only-verified
 
