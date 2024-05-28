@@ -133,8 +133,28 @@ jobs:
           name: test-results
           path: build/test-results/test/
 
+
       - name: Upload Code Coverage Report
         uses: actions/upload-artifact@v3
         with:
           name: code-coverage-report
           path: build/reports/jacoco/
+
+  TruffleHog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: TruffleHog OSS
+        id: trufflehog
+        uses: trufflesecurity/trufflehog@main
+        continue-on-error: true
+        with:
+          path: ./
+          base: test
+          head: HEAD
+          extra_args: --debug
+
