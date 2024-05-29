@@ -289,7 +289,7 @@ jobs:
       - name: trivy manual local code scan
         run: |
           ls && pwd
-          trivy fs $PWD
+          trivy fs /home/runner/work/sdos/sdos
         
         
       # - name: Run Trivy vulnerability scanner
