@@ -287,19 +287,18 @@ jobs:
           trivy image --format sarif --output trivy_license_image.sarif ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}}
 
       - name: Upload Trivy image license results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'trivy_license_image.sarif'
 
       - name: trivy manual local code scan
         run: |
-          ls && pwd
-          trivy fs  --format sarif --output trivy_code.sarif /home/runner/work/sdos/sdos/src
+          trivy rootfs  --format sarif --output trivy_code.sarif /home/runner/work/sdos/sdos
 
-      - name: Upload Trivy code results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: 'trivy_code.sarif'
+      # - name: Upload Trivy code results to GitHub Security tab
+      #   uses: github/codeql-action/upload-sarif@v2
+      #   with:
+      #     sarif_file: 'trivy_code.sarif'
         
         
       # - name: Run Trivy vulnerability scanner
