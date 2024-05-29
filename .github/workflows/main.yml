@@ -94,9 +94,14 @@ jobs:
         echo '  make release'
         exit 1
 
+      
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "/language:${{matrix.language}}"
+
 
   ##################################################################
-
   build:
     runs-on: ubuntu-latest
     permissions:
@@ -192,9 +197,3 @@ jobs:
       #   uses: github/codeql-action/upload-sarif@v2
       #   with:
       #     sarif_file: 'trivy_code.sarif'
-  
-
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v3
-      with:
-        category: "/language:${{matrix.language}}"
