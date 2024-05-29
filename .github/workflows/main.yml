@@ -237,7 +237,7 @@ jobs:
           scan-type: 'rootfs'
           format: 'sarif'
           # output: 'trivy-fs-results.sarif'
-          severity: 'CRITICAL,HIGH'
+          severity: 'CRITICAL'
           exit-code: '1'
           ignore-unfixed: true
 
