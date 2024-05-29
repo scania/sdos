@@ -293,7 +293,7 @@ jobs:
 
       - name: trivy manual local code scan
         run: |
-          trivy rootfs  --format sarif --output trivy_code.sarif /home/runner/work/sdos/sdos
+          trivy rootfs /home/runner/work/sdos/sdos
 
       # - name: Upload Trivy code results to GitHub Security tab
       #   uses: github/codeql-action/upload-sarif@v2
