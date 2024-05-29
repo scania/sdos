@@ -279,26 +279,31 @@ jobs:
         run: | 
           ls -ltr && docker ps
           docker build  -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}} .
-        
-        
-        
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
-        with:
-          image-ref: '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}}'
-          format: 'sarif'
-          # template: '@/contrib/sarif.tpl'
-          output: 'trivy-results.sarif'
-          severity: 'CRITICAL,HIGH,MEDIUM,LOW'
-          github-pat: ${{ secrets.PAT_TOKEN }}
-          # docker-host: //var/run/docker.sock
-          vuln-type: 'os,library'
-          scanners: 'vuln,secret'
 
-      - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: 'trivy-results.sarif'
+      - name: trivy manual image scan
+        run: |
+          wget https://github.com/aquasecurity/trivy/releases/download/v0.26.0/trivy_0.26.0_Linux-64bit.deb
+          sudo dpkg -i trivy_0.26.0_Linux-64bit.deb
+          trivy image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}}
+        
+        
+      # - name: Run Trivy vulnerability scanner
+      #   uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
+      #   with:
+      #     image-ref: '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}}'
+      #     format: 'sarif'
+      #     # template: '@/contrib/sarif.tpl'
+      #     output: 'trivy-results.sarif'
+      #     severity: 'CRITICAL,HIGH,MEDIUM,LOW'
+      #     github-pat: ${{ secrets.PAT_TOKEN }}
+      #     # docker-host: //var/run/docker.sock
+      #     vuln-type: 'os,library'
+      #     # scanners: 'vuln,secret'
+
+      # - name: Upload Trivy scan results to GitHub Security tab
+      #   uses: github/codeql-action/upload-sarif@v2
+      #   with:
+      #     sarif_file: 'trivy-results.sarif'
           
       # - name: Scan image in a private registry
       #   uses: aquasecurity/trivy-action@master
