@@ -286,12 +286,12 @@ jobs:
         uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
         with:
           image-ref: '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}}'
-          format: 'template'
-          template: '@/contrib/sarif.tpl'
+          format: 'sarif'
+          # template: '@/contrib/sarif.tpl'
           output: 'trivy-results.sarif'
           severity: 'CRITICAL,HIGH,MEDIUM,LOW'
           github-pat: ${{ secrets.PAT_TOKEN }}
-          docker-host: //var/run/docker.sock
+          # docker-host: //var/run/docker.sock
           vuln-type: 'os,library'
           scanners: 'vuln,secret'
 
