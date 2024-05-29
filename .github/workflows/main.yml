@@ -279,7 +279,7 @@ jobs:
         run: | 
           ls -ltr && docker ps
           docker build  -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}} .
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}}
+        
         
         
       - name: Run Trivy vulnerability scanner
