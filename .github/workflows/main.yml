@@ -1,348 +1,93 @@
-name: Docker
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+# For most projects, this workflow file will not need changing; you simply need
+# to commit it to your repository.
+#
+# You may wish to alter this file to override the set of languages analyzed,
+# or to provide custom queries or build logic.
+#
+# ******** NOTE ********
+# We have attempted to detect the languages in your repository. Please check
+# the `language` matrix defined below to confirm you have the correct set of
+# supported CodeQL languages.
+#
+name: "CodeQL"
 
 on:
-  # schedule:
-  #   - cron: '27 0 * * *'
-  # push:
-  #   branches: [ "check" ]
-  #   # Publish semver tags as releases.
-  #   tags: [ 'v*.*.*' ]
+  push:
+    branches: [ "docker-pipeline" ]
   pull_request:
     branches: [ "docker-pipeline" ]
-    # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-env:
-  # Use docker.io for Docker Hub if empty
-  REGISTRY: ghcr.io
-  # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}
-  TG: docker-pipeline
-
+  # schedule:
+  #   - cron: '33 7 * * 5'
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    # Runner size impacts CodeQL analysis time. To learn more, please see:
+    #   - https://gh.io/recommended-hardware-resources-for-running-codeql
+    #   - https://gh.io/supported-runners-and-hardware-resources
+    #   - https://gh.io/using-larger-runners (GitHub.com only)
+    # Consider using larger runners or machines with greater resources for possible analysis time improvements.
+    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
+    timeout-minutes: ${{ (matrix.language == 'swift' && 120) || 360 }}
     permissions:
-      contents: write
-      packages: write
+      # required for all workflows
       security-events: write
-      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
 
-      # This is used to complete the identity challenge
-      # with sigstore/fulcio when running outside of PRs.
-      id-token: write
+      # required to fetch internal or private CodeQL packs
+      packages: read
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          submodules: 'true'
-          token: ${{ secrets.PAT_TOKEN }}
-          
-      - name: validating gradlle
-        uses: gradle/actions/wrapper-validation@v3
-          
-      # - name: 'Dependency Review'
-      #   uses: actions/dependency-review-action@v4
-      #   # Commonly enabled options, see https://github.com/actions/dependency-review-action#configuration-options for all available options.
-      #   with:
-      #     comment-summary-in-pr: always
-        #   fail-on-severity: moderate
-        #   deny-licenses: GPL-1.0-or-later, LGPL-2.0-or-later
-        #   retry-on-snapshot-warnings: true
-      # - name: 'Dependency Review'
-      #   # if: github.event_name == 'workflow_dispatch'
-      #   uses: actions/dependency-review-action@v4
-        # with:
-        #   base-ref: 'docker-pipeline'
-
-      # - uses: github/codeql-action/init@v3
-      #   with:
-      #     languages: java
-
-      # - name: Autobuild
-      #   uses: github/codeql-action/autobuild@v3
-          
-      # - name: Perform CodeQL Analysis
-      #   uses: github/codeql-action/analyze@v3
-
-      # - name: Run Trivy scanner
-      #   uses: aquasecurity/trivy-action@master
-      #   with:
-      #     scan-type: 'fs'
-      #     github-pat: ${{ secrets.GITHUB_TOKEN }}
-      #     ignore-unfixed: true
-      #     format: 'sarif'
-      #     output: 'trivy-results.sarif'
-      #     severity: 'CRITICAL'
-      #     # hide-progress: true
-      #     # output: trivy.txt
-
-      # - name: Publish Trivy Output to Summary
-      #   run: |
-      #     if [[ -s trivy.txt ]]; then
-      #       {
-      #         echo "### Security Output"
-      #         echo "<details><summary>Click to expand</summary>"
-      #         echo ""
-      #         echo '```terraform'
-      #         cat trivy.txt
-      #         echo '```'
-      #         echo "</details>"
-      #       } >> $GITHUB_STEP_SUMMARY
-      #     fi
-
-##########################################################################
-      # - name: Run Trivy vulnerability scanner in repo mode
-      #   uses: aquasecurity/trivy-action@master
-      #   with:
-      #     scan-type: 'fs'
-      #     format: 'sarif'
-      #     output: 'trivy-results.sarif'
-      #     severity: 'CRITICAL,LOW,MEDIUM,HIGH'
-      #     vuln-type: 'os,library'
-      #     scanners: 'vuln,secret'
-          
-
-      # - name: Upload Trivy scan results to GitHub Security tab
-      #   uses: github/codeql-action/upload-sarif@v2
-      #   with:
-      #     sarif_file: 'trivy-results.sarif'
-
- ##############################################         
-
-      # - name: Run Codacy Analysis CLI
-      #   uses: codacy/codacy-analysis-cli-action@master
-        
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Run chmod to make gradlew executable
-        run: chmod +x ./gradlew
-
-      # - name: check
-      #   run: |
-      #     ./gradlew dependencyCheckAnalyze --debug
-
-      # - name: upload check
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: dependency-check-report
-      #     path: ${{ github.workspace }}/build/reports/dependency-check-report.html
-        
-      - name: Set up Gradle Build Action
-        uses: gradle/gradle-build-action@v3
-        with:
-          dependency-graph: generate-and-upload
-          cache-disabled: true
-      - run: ./gradlew build
-          
-      # # Configure Gradle for optimal use in GiHub Actions, including caching of downloaded dependencies.
-      # # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
-      # - name: Setup Gradle
-      #   uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
-      #   with:
-      #     gradle-version: '8.5'
-      #     # dependency-graph: generate-and-submit
-      #     # cache-disabled: true
-  
-      # - name: Build with Gradle Wrapper
-      #   run: ./gradlew build
-
-      # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
-      # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
-      #
-      # - name: Setup Gradle
-      #   uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
-      #   with:
-      #     gradle-version: '8.5'
-      #
-      # - name: Build with Gradle 8.5
-      #   run: gradle build
-
-
-      - uses: actions/upload-artifact@master
-        with:
-          name: jar-file
-          path: build/libs
-  
-      - uses: actions/download-artifact@master
-        with:
-          name: jar-file
-
-     
-  # dependency-submission:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: read
-
-  #   steps:
-  #    - uses: actions/checkout@v4
-  #    - name: Set up JDK 17
-  #      uses: actions/setup-java@v4
-  #      with:
-  #        java-version: '17'
-  #        distribution: 'temurin'
-
-  #   # Generates and submits a dependency graph, enabling Dependabot Alerts for all project dependencies.
-  #   # See: https://github.com/gradle/actions/blob/main/dependency-submission/README.md
-  #    - name: Generate and submit dependency graph
-  #      uses: gradle/actions/dependency-submission@417ae3ccd767c252f5661f1ace9f835f9654f2b5
-  #      with:
-  #       # Use a particular Gradle version instead of the configured wrapper.
-  #        gradle-version: 8.5
-  #        dependency-graph: generate-and-upload
-        
-  #    - name: Perform dependency review
-  #      if: github.event_name == 'pull_request'
-  #      uses: actions/dependency-review-action@v3
-
-  docker-build:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      packages: write
-      security-events: write
+      # only required for workflows in private repositories
       actions: read
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - language: java-kotlin
+          build-mode: none # This mode only analyzes Java. Set this to 'autobuild' or 'manual' to analyze Kotlin too.
+        # CodeQL supports the following values keywords for 'language': 'c-cpp', 'csharp', 'go', 'java-kotlin', 'javascript-typescript', 'python', 'ruby', 'swift'
+        # Use `c-cpp` to analyze code written in C, C++ or both
+        # Use 'java-kotlin' to analyze code written in Java, Kotlin or both
+        # Use 'javascript-typescript' to analyze code written in JavaScript, TypeScript or both
+        # To learn more about changing the languages that are analyzed or customizing the build mode for your analysis,
+        # see https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/customizing-your-advanced-setup-for-code-scanning.
+        # If you are analyzing a compiled language, you can modify the 'build-mode' for that language to customize how
+        # your codebase is analyzed, see https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/codeql-code-scanning-for-compiled-languages
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      - uses: actions/checkout@v4
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+    # Initializes the CodeQL tools for scanning.
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: ${{ matrix.language }}
+        build-mode: ${{ matrix.build-mode }}
+        # If you wish to specify custom queries, you can do so here or in a config file.
+        # By default, queries listed here will override any specified in a config file.
+        # Prefix the list here with "+" to use these queries and those in the config file.
 
-      - uses: actions/download-artifact@master
-        with:
-          name: jar-file
-          path: build/libs
+        # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
+        # queries: security-extended,security-and-quality
 
-  #     # Install the cosign tool except on PR
-  #     # https://github.com/sigstore/cosign-installer
-  #     - name: Install cosign
-  #       if: github.event_name != 'pull_request'
-  #       uses: sigstore/cosign-installer@6e04d228eb30da1757ee4e1dd75a0ec73a653e06 #v3.1.1
-  #       with:
-  #         cosign-release: 'v2.1.1'
+    # If the analyze step fails for one of the languages you are analyzing with
+    # "We were unable to automatically build your code", modify the matrix above
+    # to set the build mode to "manual" for that language. Then modify this step
+    # to build your code.
+    # ℹ️ Command-line programs to run using the OS shell.
+    # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
+    - if: matrix.build-mode == 'manual'
+      shell: bash
+      run: |
+        echo 'If you are using a "manual" build mode for one or more of the' \
+          'languages you are analyzing, replace this with the commands to build' \
+          'your code, for example:'
+        echo '  make bootstrap'
+        echo '  make release'
+        exit 1
 
-  #     # Set up BuildKit Docker container builder to be able to build
-  #     # multi-platform images and export cache
-  #     # https://github.com/docker/setup-buildx-action
-  #     - name: Set up Docker Buildx
-  #       uses: docker/setup-buildx-action@f95db51fddba0c2d1ec667646a06c2ce06100226 # v3.0.0
-
-      # Login against a Docker registry except on PR
-      # https://github.com/docker/login-action
-      - name: Log into registry ${{ env.REGISTRY }}
-        if: github.event_name != 'pull_request'
-        uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-  #     # Extract metadata (tags, labels) for Docker
-  #     # https://github.com/docker/metadata-action
-  #     - name: Extract Docker metadata
-  #       id: meta
-  #       uses: docker/metadata-action@96383f45573cb7f253c731d3b3ab81c87ef81934 # v5.0.0
-  #       with:
-  #         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-
-  #     # Build and push Docker image with Buildx (don't push on PR)
-  #     # https://github.com/docker/build-push-action
-  #     - name: Build and push Docker image
-  #       id: build-and-push
-  #       uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
-  #       with:
-  #         build-args: --load
-  #         context: .
-  #         push: ${{ github.event_name != 'pull_request' }}
-  #         tags: ${{ steps.meta.outputs.tags }}
-  #         labels: ${{ steps.meta.outputs.labels }}
-  #         cache-from: type=gha
-  #         cache-to: type=gha,mode=max
-      - name: build and push docker image
-        run: | 
-          ls -ltr && docker ps
-          docker build  -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}} .
-
-      - name: trivy manual image scan
-        run: |
-          wget https://github.com/aquasecurity/trivy/releases/download/v0.26.0/trivy_0.26.0_Linux-64bit.deb
-          sudo dpkg -i trivy_0.26.0_Linux-64bit.deb
-          trivy image --format sarif --output trivy_license_image.sarif ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}}
-
-      - name: Upload Trivy image license results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: 'trivy_license_image.sarif'
-
-      - name: trivy manual local code scan
-        run: |
-          trivy rootfs /home/runner/work/sdos/sdos
-
-      # - name: Upload Trivy code results to GitHub Security tab
-      #   uses: github/codeql-action/upload-sarif@v2
-      #   with:
-      #     sarif_file: 'trivy_code.sarif'
-        
-        
-      # - name: Run Trivy vulnerability scanner
-      #   uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
-      #   with:
-      #     image-ref: '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}}'
-      #     format: 'sarif'
-      #     # template: '@/contrib/sarif.tpl'
-      #     output: 'trivy-results.sarif'
-      #     severity: 'CRITICAL,HIGH,MEDIUM,LOW'
-      #     github-pat: ${{ secrets.PAT_TOKEN }}
-      #     # docker-host: //var/run/docker.sock
-      #     vuln-type: 'os,library'
-      #     # scanners: 'vuln,secret'
-
-      # - name: Upload Trivy scan results to GitHub Security tab
-      #   uses: github/codeql-action/upload-sarif@v2
-      #   with:
-      #     sarif_file: 'trivy-results.sarif'
-          
-      # - name: Scan image in a private registry
-      #   uses: aquasecurity/trivy-action@master
-      #   with:
-      #     image-ref: "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}}"
-      #     scan-type: 'image'
-      #     format: 'sarif'
-      #     output: 'trivy-results-image.sarif'
-      #     github-pat: ${{ secrets.GITHUB_TOKEN }} # or ${{ secrets.github_pat_name }} if you're using a PAT
-      #     severity: "MEDIUM,HIGH,CRITICAL"
-      #     scanners: "vuln"	 
-
-
-
-  #     # # Sign the resulting Docker image digest except on PRs.
-  #     # # This will only write to the public Rekor transparency log when the Docker
-  #     # # repository is public to avoid leaking data.  If you would like to publish
-  #     # # transparency data even for private images, pass --force to cosign below.
-  #     # # https://github.com/sigstore/cosign
-  #     # - name: Sign the published Docker image
-  #     #   if: ${{ github.event_name != 'pull_request' }}
-  #     #   env:
-  #     #     # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
-  #     #     TAGS: ${{ steps.meta.outputs.tags }}
-  #     #     DIGEST: ${{ steps.build-and-push.outputs.digest }}
-  #     #   # This step uses the identity token to provision an ephemeral certificate
-  #     #   # against the sigstore community Fulcio instance.
-  #     #   run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "/language:${{matrix.language}}"
