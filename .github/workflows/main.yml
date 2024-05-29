@@ -284,12 +284,22 @@ jobs:
         run: |
           wget https://github.com/aquasecurity/trivy/releases/download/v0.26.0/trivy_0.26.0_Linux-64bit.deb
           sudo dpkg -i trivy_0.26.0_Linux-64bit.deb
-          trivy image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}}
+          trivy image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}} --format sarif --output trivy_license_image.sarif
+
+      - name: Upload Trivy image license results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy_license_image.sarif'
 
       - name: trivy manual local code scan
         run: |
           ls && pwd
-          trivy fs /home/runner/work/sdos/sdos
+          trivy fs /home/runner/work/sdos/sdos/src --format sarif --output trivy_code.sarif
+
+      - name: Upload Trivy code results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy_code.sarif'
         
         
       # - name: Run Trivy vulnerability scanner
