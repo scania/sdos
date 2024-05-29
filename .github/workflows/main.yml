@@ -285,6 +285,11 @@ jobs:
           wget https://github.com/aquasecurity/trivy/releases/download/v0.26.0/trivy_0.26.0_Linux-64bit.deb
           sudo dpkg -i trivy_0.26.0_Linux-64bit.deb
           trivy image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}}
+
+      - name: trivy manual local code scan
+        run: |
+          ls && pwd
+          trivy fs $PWD
         
         
       # - name: Run Trivy vulnerability scanner
