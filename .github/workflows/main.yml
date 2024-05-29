@@ -222,7 +222,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
         with:
-          image-ref: '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{env.TG}}'
+          image-ref: '${{ steps.meta.outputs.tags }}'
           format: 'sarif'
           # output: 'trivy-results.sarif'
           severity: 'CRITICAL,HIGH'
