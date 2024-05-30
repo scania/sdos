@@ -152,7 +152,7 @@ jobs:
       - name: truffle scan
         run: | 
           curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b /usr/local/bin
-          trufflehog git https://github.com/scania/sdos --only-verified
+          trufflehog git https://github.com/scania/sdos
 
       # - name: scan-push
       #   uses: trufflesecurity/trufflehog@main
