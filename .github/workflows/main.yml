@@ -161,17 +161,21 @@ jobs:
     steps:
 
       - uses: actions/checkout@v4
-      - name: Run Trivy repo vulnerability scanner
-        uses: aquasecurity/trivy-action@0.21.0
-        with:
-          scan-type: 'repo'
-          format: 'sarif'
-          # output: 'trivy-fs-results.sarif'
-          # scan-ref: 'repo'
-          severity: 'CRITICAL'
-          exit-code: '1'
-          ignore-unfixed: true
-          scanners: misconfig,secret
+
+      - name: 'Dependency Review'
+        uses: actions/dependency-review-action@v4.3.2
+        
+      # - name: Run Trivy repo vulnerability scanner
+      #   uses: aquasecurity/trivy-action@0.21.0
+      #   with:
+      #     scan-type: 'repo'
+      #     format: 'sarif'
+      #     # output: 'trivy-fs-results.sarif'
+      #     # scan-ref: 'repo'
+      #     severity: 'CRITICAL'
+      #     exit-code: '1'
+      #     ignore-unfixed: true
+      #     scanners: misconfig,secret
       
       - name: Set up JDK 17
         uses: actions/setup-java@v4
