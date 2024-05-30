@@ -148,6 +148,9 @@ jobs:
       - uses: actions/download-artifact@master
         with:
           name: jar-file
+          
+      - name: gradle dep check
+        run: ./gradlew dependencyCheckAnalyze --info
 
 
   docker-build:
