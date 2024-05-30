@@ -161,6 +161,17 @@ jobs:
     steps:
 
       - uses: actions/checkout@v4
+      - name: Run Trivy repo vulnerability scanner
+        uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
+        with:
+          scan-type: 'fs'
+          format: 'sarif'
+          # output: 'trivy-fs-results.sarif'
+          severity: 'CRITICAL'
+          exit-code: '1'
+          ignore-unfixed: true
+          scanners: misconfig,secret
+      
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
@@ -231,15 +242,6 @@ jobs:
           vuln-type: 'os,library'
         continue-on-error: true
 
-      - name: Run Trivy repo vulnerability scanner
-        uses: aquasecurity/trivy-action@7b7aa264d83dc58691451798b4d117d53d21edfe
-        with:
-          scan-type: 'fs'
-          format: 'sarif'
-          # output: 'trivy-fs-results.sarif'
-          severity: 'CRITICAL'
-          exit-code: '1'
-          ignore-unfixed: true
 
       # - name: Upload Trivy scan results to GitHub Security tab
       #   uses: github/codeql-action/upload-sarif@v2
