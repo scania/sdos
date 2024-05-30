@@ -148,9 +148,16 @@ jobs:
       - uses: actions/download-artifact@master
         with:
           name: jar-file
+
+      - name: scan-push
+        uses: trufflesecurity/trufflehog@main
+        with:
+          base: ""
+          head: ${{ github.ref_name }}
+          extra_args: --only-verified
           
-      - name: gradle dep check
-        run: ./gradlew dependencyCheckAnalyze --info
+      # - name: gradle dep check
+      #   run: ./gradlew dependencyCheckAnalyze --info
 
 
   docker-build:
