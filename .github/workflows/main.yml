@@ -164,6 +164,14 @@ jobs:
 
       - name: 'Dependency Review'
         uses: actions/dependency-review-action@v4.3.2
+
+      - name: Depcheck
+        uses: dependency-check/Dependency-Check_Action@1.1.0
+        id: Depcheck
+        with:
+          project: 'test'
+          path: '.'
+          format: 'HTML'
         
       # - name: Run Trivy repo vulnerability scanner
       #   uses: aquasecurity/trivy-action@0.21.0
