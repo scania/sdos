@@ -167,7 +167,7 @@ jobs:
           scan-type: 'repo'
           format: 'sarif'
           # output: 'trivy-fs-results.sarif'
-          scan-ref: 'repo'
+          # scan-ref: 'repo'
           severity: 'CRITICAL'
           exit-code: '1'
           ignore-unfixed: true
