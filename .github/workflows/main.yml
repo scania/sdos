@@ -164,10 +164,10 @@ jobs:
       - name: Run Trivy repo vulnerability scanner
         uses: aquasecurity/trivy-action@0.21.0
         with:
-          scan-type: 'fs'
+          scan-type: 'repo'
           format: 'sarif'
           # output: 'trivy-fs-results.sarif'
-          scan-ref: .
+          scan-ref: 'repo'
           severity: 'CRITICAL'
           exit-code: '1'
           ignore-unfixed: true
