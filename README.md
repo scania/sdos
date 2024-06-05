@@ -136,7 +136,6 @@ at http://localhost:8050/sdos/swagger-ui.html
 If you face any issues, find any bugs or have any questions regarding the application the SDOS
 development team is available through mail [sdos@scania.com](mailto:sdos@scania.com)
 
-(**support mail is not available, we are working on it**)
 
 [Community Page](https://github.com/scania/sdos/discussions) is also available for the discussion.
 
