@@ -67,6 +67,18 @@ public class Rdf4jClient {
 
   private static String STARDOG_PASS = "password";
 
+  private static String aws_session_token = "gfhvbdfdter547uthgy";
+
+  private static String aws_temporary_access_key_id = "12345";
+
+  private static String azure_function_key = "azure_function_key";
+
+  private static String baiducloud_api_accesskey = "baiducloud_api_accesskey";
+
+  private static String cratesio_api_token = "cratesio_api_token";
+
+
+
   public Rdf4jClient() {
     //default  constructor
   }
