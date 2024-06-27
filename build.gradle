@@ -62,7 +62,7 @@ dependencies {
     implementation 'org.apache.jena:jena-core:5.0.0-rc1'
     implementation 'org.apache.jena:jena-arq:5.0.0-rc1'
     implementation 'org.apache.jena:jena-iri:5.0.0-rc1'
-    implementation group: 'org.apache.commons', name: 'commons-compress', version: '1.26.1'
+    implementation group: 'org.apache.commons', name: 'commons-compress', version: '1.26.2'
     implementation group: 'org.apache.commons', name: 'commons-text', version: '1.11.0'
     implementation group: 'org.quartz-scheduler', name: 'quartz', version: '2.5.0-rc1'
     implementation group: 'io.grpc', name: 'grpc-protobuf', version: '1.62.2'
