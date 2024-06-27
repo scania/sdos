@@ -60,7 +60,7 @@ dependencies {
     implementation 'org.apache.groovy:groovy-xml:4.0.5'
     implementation 'org.apache.groovy:groovy-json:4.0.5'
     implementation 'org.apache.jena:jena-core:5.0.0-rc1'
-    implementation 'org.apache.jena:jena-arq:5.0.0-rc1'
+    implementation 'org.apache.jena:jena-arq:5.0.0'
     implementation 'org.apache.jena:jena-iri:5.0.0-rc1'
     implementation group: 'org.apache.commons', name: 'commons-compress', version: '1.26.1'
     implementation group: 'org.apache.commons', name: 'commons-text', version: '1.11.0'
