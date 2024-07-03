@@ -187,7 +187,8 @@ jobs:
           project: 'test'
           path: '.'
           format: 'HTML'
-        
+
+      # Trivy repo
       # - name: Run Trivy repo vulnerability scanner
       #   uses: aquasecurity/trivy-action@0.21.0
       #   with:
