@@ -276,6 +276,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Set permissions
+        run: sudo chmod -R 777 /home/runner/work/sdos/sdos
       - name: Run Gitleaks
         uses: gitleaks/gitleaks-action@v2
         env:
