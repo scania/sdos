@@ -13,9 +13,9 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ "test" ]
+    branches: [ "docker-pipeline" ]
   pull_request:
-    branches: [ "test" ]
+    branches: [ "docker-pipeline" ]
   # schedule:
   #   - cron: '33 7 * * 5'
 
