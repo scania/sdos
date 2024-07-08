@@ -277,6 +277,7 @@ jobs:
         with:
           fetch-depth: 0
           clean: false
+          ref: refs/heads/test
       - name: Set permissions for reports directory
         run: sudo chmod -R 777 /home/runner/work/sdos/sdos/reports || true
 
