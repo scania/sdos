@@ -67,6 +67,8 @@ public class Rdf4jClient {
 
   private static String STARDOG_PASS = "password";
 
+  private static String password = "gfhvbdfdter547uthgy";
+  
   private static String aws_session_token = "gfhvbdfdter547uthgy";
 
   private static String aws_temporary_access_key_id = "12345";
