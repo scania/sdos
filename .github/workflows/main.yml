@@ -13,9 +13,9 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ "docker-pipeline" ]
+    branches: [ "docker-pipeline", "test" ]
   pull_request:
-    branches: [ "docker-pipeline" ]
+    branches: [ "docker-pipeline", "test" ]
   # schedule:
   #   - cron: '33 7 * * 5'
 
@@ -286,11 +286,16 @@ jobs:
 
       - name: Manual cleanup
         run: sudo rm -rf /home/runner/work/sdos/sdos/* || true
-      
+
+      - name: Run Gitleaks manually
+        run: |
+          git clone https://github.com/gitleaks/gitleaks.git
+          cd gitleaks
+          make build
+          gitleaks detect -v -s ../
+          
       - name: Run Gitleaks
         uses: gitleaks/gitleaks-action@v2
-        with:
-          args: detect --redact -v --exit-code=2 --report-format=sarif --report-path=results.sarif --log-level=debug
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE}} # Only required for Organizations, not personal accounts.
