@@ -292,7 +292,7 @@ jobs:
           git clone https://github.com/gitleaks/gitleaks.git
           cd gitleaks
           make build
-          gitleaks detect -v -s ../
+          ./gitleaks detect -v -s ../
           
       - name: Run Gitleaks
         uses: gitleaks/gitleaks-action@v2
