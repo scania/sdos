@@ -1,0 +1,30 @@
+name: "Find Secrets"
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: "0 6 * * *" 
+
+permissions:
+ id-token: write
+ contents: read
+ actions: read
+ security-events: write
+
+jobs:
+  scan:
+    name: gitleaks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2.3.4
+        name: Check any Leaked Secrets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_ENABLE_COMMENTS: 'true'
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+
+          
