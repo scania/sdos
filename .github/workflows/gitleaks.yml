@@ -33,6 +33,6 @@ jobs:
         echo "### 🛑 Gitleaks Detected Secrets 🛑" >> $GITHUB_STEP_SUMMARY
         echo "|  *Rule ID* | *Commit* | *Secret URL* | *Start Line* | *Author* | *Date* | *Email* | *File* |" >> $GITHUB_STEP_SUMMARY
         echo "| --- | --- | --- | --- | --- | --- | --- | --- |" >> $GITHUB_STEP_SUMMARY
-        jq -r '.runs[0].results[] | "| \(.ruleId) | \(.partialFingerprints.commitSha[:7]) | \(.locations[0].physicalLocation.artifactLocation.uri) | \(.locations[0].physicalLocation.region.startLine) | \(.partialFingerprints.author) | \(.partialFingerprints.date) | \(.partialFingerprints.email) | \(.locations[0].physicalLocation.artifactLocation.uri)"' results.sarif >> $GITHUB_STEP_SUMMARY
+        jq -r '.runs[0].results[] | "| \(.ruleId) | \(.partialFingerprints.commitSha[:7]) | \(.locations[0].physicalLocation.artifactLocation.uri) | \(.locations[0].physicalLocation.region.startLine) | \(.partialFingerprints.author) | \(.partialFingerprints.date) | \(.partialFingerprints.email | split("+")[1]) | \(.locations[0].physicalLocation.artifactLocation.uri)"' results.sarif >> $GITHUB_STEP_SUMMARY
         cat $GITHUB_STEP_SUMMARY
       continue-on-error: true
