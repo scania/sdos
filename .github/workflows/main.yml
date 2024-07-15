@@ -254,7 +254,7 @@ jobs:
           git clone https://github.com/gitleaks/gitleaks.git
           cd gitleaks
           make build
-          ./gitleaks detect -v -f sarif -r ./gitleaks_scan.sarif -s ../        
+          ./gitleaks detect -v -f sarif -r ../gitleaks_scan.sarif -s ../        
         
       - name: Upload Gitleaks scan results to GitHub Security tab
         if: always()
