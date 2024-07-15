@@ -54,6 +54,7 @@ jobs:
         GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
 
     - name: Upload SARIF report
+      if: always()
       uses: actions/upload-artifact@v4
       with:
         name: gitleaks-sarif-report
