@@ -264,3 +264,9 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'gitleaks_scan.sarif'
+      
+      - name: List SARIF File
+        run: ls -l ../gitleaks_scan.sarif
+
+      - name: Display SARIF File Content
+        run: cat ../gitleaks_scan.sarif
