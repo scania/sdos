@@ -23,7 +23,7 @@ jobs:
       - uses: gitleaks/gitleaks-action@v2.3.4
         name: Check any Leaked Secrets
         with:
-         args: ./gitleaks detect --redact -v -f sarif -r ./gitleaks_scan.sarif
+         args: detect --redact -v -f sarif -r ./gitleaks_scan.sarif
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLEAKS_ENABLE_COMMENTS: 'true'
