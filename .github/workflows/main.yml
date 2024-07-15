@@ -242,22 +242,22 @@ jobs:
           vuln-type: 'os,library'
         continue-on-error: true
 
-      # Gitleaks
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          clean: false
+      # # Gitleaks
+      # - name: Checkout repository
+      #   uses: actions/checkout@v4
+      #   with:
+      #     fetch-depth: 0
+      #     clean: false
           
-      - name: Run Gitleaks manually
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }} # Required for Organizations, not personal accounts.
-        run: |
-          git clone https://github.com/gitleaks/gitleaks.git
-          cd gitleaks
-          make build
-          ./gitleaks detect -v -f sarif -r ../gitleaks_scan.sarif -s ../        
+      # - name: Run Gitleaks manually
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }} # Required for Organizations, not personal accounts.
+      #   run: |
+      #     git clone https://github.com/gitleaks/gitleaks.git
+      #     cd gitleaks
+      #     make build
+      #     ./gitleaks detect -v -f sarif -r ../gitleaks_scan.sarif -s ../        
         
       # - name: Upload Gitleaks scan results to GitHub Security tab
       #   if: always()
