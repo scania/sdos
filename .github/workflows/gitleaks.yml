@@ -30,5 +30,8 @@ jobs:
     - name: Output Gitleaks results to console
       if: always()
       run: |
-        cat results.sarif | jq '.runs[0].results[] | {message: .message.text, ruleId: .ruleId, locations: .locations[].physicalLocation.artifactLocation.uri}'
+        echo "### Gitleaks detected secrets" >> $GITHUB_STEP_SUMMARY
+        jq -r '.runs[0].results[] | "🔴 *File:* \(.locations[].physicalLocation.artifactLocation.uri)\n  - *Secret:* \(.message.text)\n  - *Rule ID:* \(.ruleId)"' results.sarif >> $GITHUB_STEP_SUMMARY
+        cat $GITHUB_STEP_SUMMARY
+      #  cat results.sarif | jq '.runs[0].results[] | {message: .message.text, ruleId: .ruleId, locations: .locations[].physicalLocation.artifactLocation.uri}'
       continue-on-error: true
