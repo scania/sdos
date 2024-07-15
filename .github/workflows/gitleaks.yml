@@ -26,3 +26,8 @@ jobs:
       with:
         name: gitleaks-results.sarif
         path: results.sarif
+    
+    - name: Output Gitleaks results to console
+      if: always()
+      run: cat results.sarif | jq '.runs[0].results[] | {message: .message.text, ruleId: .ruleId, locations: .locations[].physicalLocation.artifactLocation.uri}'
+      continue-on-error: true
