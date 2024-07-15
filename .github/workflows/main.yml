@@ -255,7 +255,11 @@ jobs:
           cd gitleaks
           make build
           ./gitleaks detect -v -f sarif -r ./gitleaks_scan.sarif -s ../ 
-          
+
+      - name: Run a step that might fail
+        run: exit 1
+        continue-on-error: true
+        
       - name: Upload Gitleaks scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
         with:
