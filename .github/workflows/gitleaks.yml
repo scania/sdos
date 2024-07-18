@@ -1,0 +1,38 @@
+name: Gitleaks Scan
+on: [push, pull_request]
+
+jobs:
+  gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install Gitleaks
+      run: |
+        curl -sSfL https://github.com/gitleaks/gitleaks/releases/download/v8.18.4/gitleaks_8.18.4_linux_x64.tar.gz | tar -xz -C /usr/local/bin gitleaks
+
+    - name: Run Gitleaks
+      run: |
+        gitleaks detect --redact -v --exit-code=2 --report-format=sarif --report-path=results.sarif --log-level=debug
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITLEAKS_ENABLE_COMMENTS: 'true'
+        GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+
+    - name: Upload SARIF report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: gitleaks-results.sarif
+        path: results.sarif
+    
+    - name: Output Gitleaks results to console
+      if: always()
+      run: |
+        echo "### 🛑 Gitleaks Detected Secrets 🛑" >> $GITHUB_STEP_SUMMARY
+        echo "|  *Rule ID* | *Commit* | *Secret URL* | *Start Line* | *Author* | *Date* | *Email* | *File* |" >> $GITHUB_STEP_SUMMARY
+        echo "| --- | --- | --- | --- | --- | --- | --- | --- |" >> $GITHUB_STEP_SUMMARY
+        jq -r '.runs[0].results[] | "| \(.ruleId) | \(.partialFingerprints.commitSha[:7]) | \(.locations[0].physicalLocation.artifactLocation.uri) | \(.locations[0].physicalLocation.region.startLine) | \(.partialFingerprints.author) | \(.partialFingerprints.date) | \(.partialFingerprints.email | split("+")[1]) | \(.locations[0].physicalLocation.artifactLocation.uri)"' results.sarif >> $GITHUB_STEP_SUMMARY
+        cat $GITHUB_STEP_SUMMARY
+      continue-on-error: true

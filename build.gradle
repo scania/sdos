@@ -3,9 +3,10 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'org.barfuin.gradle.jacocolog' version '3.1.0'
+    id 'com.github.jk1.dependency-license-report' version '2.8'
 }
 
-group = 'com.scania.sdos'
+group = 'com.scania.sdip'
 version = '0.0.1-SNAPSHOT'
 apply plugin: 'maven-publish'
 java {
@@ -37,6 +38,9 @@ repositories {
 
 ext['log4j2.version'] = '2.22.1'
 
+checkLicense {
+    allowedLicenseFile = project.hasProperty('allowedLicenseFile') ? allowedLicenseFile : null
+}
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
@@ -119,7 +123,7 @@ test {
 }
 
 tasks.withType(JavaExec).configureEach {
-    jvmArgs = ['-Xms4g', '-Xmx6g', '-Xss1g']
+    jvmArgs = ['-Xms4g', '-Xmx6g', '-Xss2g']
 }
 
 tasks.withType(Jar) { duplicatesStrategy = DuplicatesStrategy.EXCLUDE }
