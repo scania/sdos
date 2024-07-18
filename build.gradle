@@ -38,10 +38,9 @@ repositories {
 
 ext['log4j2.version'] = '2.22.1'
 
-ext {
+checkLicense {
     allowedLicenseFile = project.hasProperty('allowedLicenseFile') ? allowedLicenseFile : null
 }
-
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
