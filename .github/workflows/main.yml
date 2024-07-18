@@ -104,7 +104,10 @@ jobs:
         with:
           dependency-graph: generate-and-upload
           cache-disabled: true
-      - run: ./gradlew build
+      - run: |
+          ./gradlew build
+          ./gradlew generateLicenseReport
+          ./gradlew checkLicense          
           
       - uses: actions/upload-artifact@master
         with:
